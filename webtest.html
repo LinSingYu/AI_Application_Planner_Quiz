@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 應用規劃師測驗 - 隨機題庫版</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .option-btn:active {
+            transform: scale(0.98);
+        }
+        /* 美化捲動條 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div id="app" class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden transition-all duration-300 relative border border-gray-100">
+        <!-- 頂部標題列 -->
+        <div class="bg-indigo-700 p-5 text-white">
+            <div id="header-content" class="flex justify-between items-center px-2">
+                <!-- 標題會根據狀態動態變換 -->
+                <h1 class="text-lg font-bold tracking-wider flex items-center gap-2">
+                    AI 應用規劃師專業測驗
+                </h1>
+            </div>
+        </div>
+
+        <!-- 視圖容器 -->
+        <div id="view-container" class="p-6 md:p-10 min-h-[480px]">
+            <!-- 內容動態插入 -->
+        </div>
+    </div>
+
+    <script>
+        // 原始題庫資料
+        const questionBank = [
+            {
+                question: "在人工智慧系統的決策流程中，關於「人在迴圈上（Human-over-the-loop）」的敘述，下列何者正確？",
+                options: [
+                    "人類參與每一次的 AI 決策流程。",
+                    "人類對 AI 的運行進行日常監督，必要時可立即介入修正或干預。",
+                    "AI 的所有判斷皆須經過人類審核。",
+                    "人類完全不參與 AI 運作。"
+                ],
+                correct: 1, // B
+                explanation: "Human-over-the-loop 強調的是監督機制，人類平時進行監督，必要時介入，而非參與每一次決策（那是 Human-in-the-loop）。"
+            },
+            {
+                question: "在機器學習中，若希望抑制模型學習過於複雜的模式以提升泛化能力，通常會使用下列哪種技術？",
+                options: [
+                    "特徵交叉（Feature Cross）",
+                    "正規化（Normalization）",
+                    "正則化（Regularization）",
+                    "獨熱編碼（One-hot Encoding）"
+                ],
+                correct: 2, // C
+                explanation: "正則化（如 L1、L2）透過在損失函數中加入懲罰項，減少權重的絕對值或使其趨近於零，以控制模型複雜度並避免過度擬合。"
+            },
+            {
+                question: "下列哪一項任務最適合使用「非監督式學習（Unsupervised Learning）」來處理？",
+                options: [
+                    "根據已標記的醫療影像診斷疾病。",
+                    "根據歷史房價數據預測未來房價。",
+                    "根據消費者的購買行為將其自動分群。",
+                    "透過獎勵機制訓練電腦玩圍棋。"
+                ],
+                correct: 2, // C
+                explanation: "非監督式學習不依賴標籤，其核心在於發掘資料內在結構，例如分群（Clustering）或降維。選項 (A)(B) 為監督式學習，(D) 為強化學習。"
+            },
+            {
+                question: "關於鑑別式 AI（Discriminative AI）與生成式 AI（Generative AI）的差異，下列敘述何者正確？",
+                options: [
+                    "生成式 AI 的主要目標是進行分類與預測。",
+                    "鑑別式 AI 側重於學習數據的聯合分佈以產生新樣本。",
+                    "鑑別式 AI 專注於學習數據特徵與標籤之間的邊界（決策邊界）。",
+                    "生成式 AI 不會產生新的數據，僅能分析現有數據。"
+                ],
+                correct: 2, // C
+                explanation: "鑑別式 AI 專注於尋找分類邊界（如 SVM、決策樹）；生成式 AI 則專注於學習數據分佈並生成新內容（如 GAN、Diffusion Models）。"
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ]
+                correct: 0, //A
+                explanation: ""
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ]
+                correct: 0, //A
+                explanation: ""
+            },
+            // {
+            //     question: "",
+            //     options: [
+            //         "",
+            //         "",
+            //         "",
+            //         ""
+            //     ]
+            //     correct: 0, //A
+            //     explanation: ""
+            // },
+
+        ];
+
+        let state = {
+            currentIndex: 0,
+            score: 0,
+            userAnswers: [],
+            sessionQuestions: [] // 存放本輪打亂後的題目
+        };
+
+        window.onload = () => renderHome();
+
+        // 洗牌演算法
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // 更新導航欄
+        function updateHeader(isQuiz) {
+            const header = document.getElementById('header-content');
+            if (isQuiz) {
+                header.innerHTML = `
+                    <h1 class="text-lg font-bold tracking-wider">專業測驗進行中</h1>
+                    <button onclick="renderHome()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition flex items-center gap-1 border border-white/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        返回首頁
+                    </button>
+                `;
+            } else {
+                header.innerHTML = `
+                    <h1 class="text-lg font-bold tracking-wider flex-1 text-center">AI 應用規劃師測驗系統</h1>
+                `;
+            }
+        }
+
+        function renderHome() {
+            updateHeader(false);
+            const container = document.getElementById('view-container');
+            container.innerHTML = `
+                <div class="text-center py-10 fade-in">
+                    <div class="mb-8 inline-flex p-5 bg-indigo-50 rounded-full text-indigo-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-black text-gray-800 mb-4">隨機模擬挑戰</h2>
+                    <p class="text-gray-500 mb-10 text-lg">每次測驗的<span class="text-indigo-600 font-bold">題目順序</span>與<span class="text-indigo-600 font-bold">選項位置</span>皆會重新隨機排列。</p>
+                    <button onclick="startQuiz()" class="w-full sm:w-64 bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200">
+                        立即開始
+                    </button>
+                </div>
+            `;
+        }
+
+        function startQuiz() {
+            // 1. 打亂題目順序
+            let shuffledQuestions = shuffleArray([...questionBank]);
+
+            // 2. 對每一題的「選項」進行打亂，並重新標記正確答案
+            state.sessionQuestions = shuffledQuestions.map(q => {
+                let optionsWithMeta = q.options.map((text, idx) => ({
+                    text: text,
+                    isCorrect: idx === q.correct
+                }));
+
+                // 打亂選項
+                shuffleArray(optionsWithMeta);
+
+                return {
+                    question: q.question,
+                    options: optionsWithMeta.map(o => o.text),
+                    correct: optionsWithMeta.findIndex(o => o.isCorrect),
+                    explanation: q.explanation
+                };
+            });
+
+            state.currentIndex = 0;
+            state.score = 0;
+            state.userAnswers = [];
+            
+            updateHeader(true);
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const container = document.getElementById('view-container');
+            const q = state.sessionQuestions[state.currentIndex];
+            const progress = ((state.currentIndex + 1) / state.sessionQuestions.length) * 100;
+
+            container.innerHTML = `
+                <div class="fade-in space-y-8">
+                    <!-- 進度與指示 -->
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">
+                            <span>Question ${state.currentIndex + 1} / ${state.sessionQuestions.length}</span>
+                            <span class="text-indigo-400">Randomized Mode</span>
+                        </div>
+                        <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-indigo-600 h-full transition-all duration-700 ease-in-out" style="width: ${progress}%"></div>
+                        </div>
+                    </div>
+
+                    <!-- 題目 -->
+                    <div class="py-2">
+                        <h2 class="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed">${q.question}</h2>
+                    </div>
+
+                    <!-- 選項 -->
+                    <div class="grid grid-cols-1 gap-4">
+                        ${q.options.map((opt, i) => `
+                            <button onclick="handleAnswer(${i})" class="option-btn group text-left p-5 border-2 border-gray-100 rounded-2xl hover:border-indigo-500 hover:bg-indigo-50 transition-all flex items-center bg-white shadow-sm">
+                                <span class="w-10 h-10 rounded-xl bg-gray-50 text-gray-400 flex items-center justify-center mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors font-black">
+                                    ${String.fromCharCode(65 + i)}
+                                </span>
+                                <span class="text-gray-700 font-medium text-lg leading-snug">${opt}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleAnswer(idx) {
+            const q = state.sessionQuestions[state.currentIndex];
+            state.userAnswers.push(idx);
+            if (idx === q.correct) state.score++;
+
+            if (state.currentIndex < state.sessionQuestions.length - 1) {
+                state.currentIndex++;
+                renderQuestion();
+            } else {
+                renderResult();
+            }
+        }
+
+        function renderResult() {
+            updateHeader(false);
+            const container = document.getElementById('view-container');
+            const total = state.sessionQuestions.length;
+            const score = Math.round((state.score / total) * 100);
+            
+            container.innerHTML = `
+                <div class="fade-in space-y-8 py-2">
+                    <div class="text-center">
+                        <h2 class="text-xl font-bold text-gray-400 mb-2 uppercase tracking-tighter">Test Completed</h2>
+                        <div class="inline-block relative mb-4">
+                            <span class="text-7xl font-black text-indigo-600">${score}</span>
+                            <span class="text-gray-400 font-bold text-lg ml-1">分</span>
+                        </div>
+                        <p class="text-gray-500">本輪答對 ${state.score} 題 / 共 ${total} 題</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <h3 class="text-lg font-bold text-gray-800 flex items-center gap-2 px-2">
+                            <span class="w-1.5 h-6 bg-indigo-600 rounded-full"></span> 詳細解析回顧
+                        </h3>
+                        <div class="space-y-4 max-h-[380px] overflow-y-auto pr-2">
+                            ${state.sessionQuestions.map((q, i) => {
+                                const isCorrect = state.userAnswers[i] === q.correct;
+                                return `
+                                    <div class="p-5 rounded-2xl border-2 ${isCorrect ? 'border-green-100 bg-green-50/50' : 'border-red-100 bg-red-50/50'}">
+                                        <div class="flex justify-between items-start gap-4 mb-3">
+                                            <p class="font-bold text-gray-800 flex-1">${i + 1}. ${q.question}</p>
+                                            ${isCorrect 
+                                                ? '<span class="text-green-600 bg-green-100 px-2 py-0.5 rounded-md text-xs font-bold whitespace-nowrap">正確</span>' 
+                                                : '<span class="text-red-600 bg-red-100 px-2 py-0.5 rounded-md text-xs font-bold whitespace-nowrap">錯誤</span>'}
+                                        </div>
+                                        <div class="text-sm mb-3">
+                                            <p class="${isCorrect ? 'text-green-700' : 'text-red-700'} font-medium">
+                                                您的回答：${String.fromCharCode(65 + state.userAnswers[i])}. ${q.options[state.userAnswers[i]]}
+                                            </p>
+                                            ${!isCorrect ? `<p class="text-green-700 font-bold mt-1">正確答案：${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}</p>` : ''}
+                                        </div>
+                                        <div class="bg-white/80 p-4 rounded-xl text-sm text-gray-600 leading-relaxed border border-gray-100">
+                                            <span class="font-bold text-indigo-600">解析：</span>${q.explanation}
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-100">
+                        <button onclick="startQuiz()" class="flex-1 bg-indigo-600 text-white py-4 rounded-2xl font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-100">
+                            重新測驗 
+                        </button>
+                        <button onclick="renderHome()" class="flex-1 bg-gray-100 text-gray-600 py-4 rounded-2xl font-bold hover:bg-gray-200 transition">
+                            回到首頁
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
