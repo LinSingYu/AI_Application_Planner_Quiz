@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 應用規劃師測驗 - 隨機題庫版</title>
+    <title>AI 應用規劃師測驗 - 分科隨機版</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: #f8fafc;
+            background-color: #f1f5f9;
         }
         .fade-in {
             animation: fadeIn 0.4s ease-out;
@@ -29,6 +29,10 @@
             background: #cbd5e1;
             border-radius: 10px;
         }
+        .tab-active {
+            border-bottom: 3px solid #4f46e5;
+            color: #4f46e5;
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -37,220 +41,605 @@
         <!-- 頂部標題列 -->
         <div class="bg-indigo-700 p-5 text-white">
             <div id="header-content" class="flex justify-between items-center px-2">
-                <!-- 標題會根據狀態動態變換 -->
-                <h1 class="text-lg font-bold tracking-wider flex items-center gap-2">
-                    AI 應用規劃師專業測驗
+                <h1 id="main-title" class="text-lg font-bold tracking-wider flex items-center gap-2">
+                    AI 應用規劃師測驗系統
                 </h1>
+                <div id="header-nav"></div>
             </div>
         </div>
 
         <!-- 視圖容器 -->
-        <div id="view-container" class="p-6 md:p-10 min-h-[480px]">
+        <div id="view-container" class="p-6 md:p-8 min-h-[500px]">
             <!-- 內容動態插入 -->
+        </div>
+
+        <!-- 自訂對話框(Modal)-->
+        <div id="custom-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm overflow-hidden fade-in">
+                <div class="p-6">
+                    <h3 id="modal-title" class="text-lg font-bold text-gray-800 mb-2">確認操作</h3>
+                    <p id="modal-content" class="text-gray-600">您確定要執行此操作嗎?</p>
+                </div>
+                <div class="bg-gray-50 p-4 flex justify-end gap-3">
+                    <button id="modal-cancel" class="px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-lg transition font-medium">取消</button>
+                    <button id="modal-confirm" class="px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded-lg transition font-medium">確定刪除</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // 原始題庫資料
-        const questionBank = [
-            {
-                question: "在人工智慧系統的決策流程中，關於「人在迴圈上（Human-over-the-loop）」的敘述，下列何者正確？",
-                options: [
-                    "人類參與每一次的 AI 決策流程。",
-                    "人類對 AI 的運行進行日常監督，必要時可立即介入修正或干預。",
-                    "AI 的所有判斷皆須經過人類審核。",
-                    "人類完全不參與 AI 運作。"
-                ],
-                correct: 1, // B
-                explanation: "Human-over-the-loop 強調的是監督機制，人類平時進行監督，必要時介入，而非參與每一次決策（那是 Human-in-the-loop）。"
-            },
-            {
-                question: "在機器學習中，若希望抑制模型學習過於複雜的模式以提升泛化能力，通常會使用下列哪種技術？",
-                options: [
-                    "特徵交叉（Feature Cross）",
-                    "正規化（Normalization）",
-                    "正則化（Regularization）",
-                    "獨熱編碼（One-hot Encoding）"
-                ],
-                correct: 2, // C
-                explanation: "正則化（如 L1、L2）透過在損失函數中加入懲罰項，減少權重的絕對值或使其趨近於零，以控制模型複雜度並避免過度擬合。"
-            },
-            {
-                question: "下列哪一項任務最適合使用「非監督式學習（Unsupervised Learning）」來處理？",
-                options: [
-                    "根據已標記的醫療影像診斷疾病。",
-                    "根據歷史房價數據預測未來房價。",
-                    "根據消費者的購買行為將其自動分群。",
-                    "透過獎勵機制訓練電腦玩圍棋。"
-                ],
-                correct: 2, // C
-                explanation: "非監督式學習不依賴標籤，其核心在於發掘資料內在結構，例如分群（Clustering）或降維。選項 (A)(B) 為監督式學習，(D) 為強化學習。"
-            },
-            {
-                question: "關於鑑別式 AI（Discriminative AI）與生成式 AI（Generative AI）的差異，下列敘述何者正確？",
-                options: [
-                    "生成式 AI 的主要目標是進行分類與預測。",
-                    "鑑別式 AI 側重於學習數據的聯合分佈以產生新樣本。",
-                    "鑑別式 AI 專注於學習數據特徵與標籤之間的邊界（決策邊界）。",
-                    "生成式 AI 不會產生新的數據，僅能分析現有數據。"
-                ],
-                correct: 2, // C
-                explanation: "鑑別式 AI 專注於尋找分類邊界（如 SVM、決策樹）；生成式 AI 則專注於學習數據分佈並生成新內容（如 GAN、Diffusion Models）。"
-            },
-            {
-                question: "",
-                options: [
-                    "",
-                    "",
-                    "",
-                    ""
-                ]
-                correct: 0, //A
-                explanation: ""
-            },
-            {
-                question: "",
-                options: [
-                    "",
-                    "",
-                    "",
-                    ""
-                ]
-                correct: 0, //A
-                explanation: ""
-            },
-            // {
-            //     question: "",
-            //     options: [
-            //         "",
-            //         "",
-            //         "",
-            //         ""
-            //     ]
-            //     correct: 0, //A
-            //     explanation: ""
-            // },
+        // 類別定義
+        const categories = ["科目一", "科目二"];
 
+        // 題庫資料(增加 category 欄位)
+        let questionBank = [
+            {
+                category: "科目一",
+                question: "在人工智慧系統的決策流程中，關於「人在迴圈上(Human-over-the-loop)」的敘述，下列何者正確?",
+                options: ["人類參與每一次的 AI 決策流程。", 
+                          "人類對 AI 的運行進行日常監督，必要時可立即介入修正或干預。", 
+                          "AI 的所有判斷皆須經過人類審核。", 
+                          "人類完全不參與 AI 運作。"
+                        ],
+                correct: 1,
+                explanation: "Human-over-the-loop 強調的是監督機制，人類平時進行監督，必要時介入。"
+            },
+            {
+                category: "科目一",
+                question: "在機器學習中，若希望抑制模型學習過於複雜的模式以提升泛化能力，通常會使用下列哪種技術?",
+                options: ["特徵交叉(Feature Cross)", 
+                            "正規化(Normalization)", 
+                            "正則化(Regularization)", 
+                            "獨熱編碼(One-hot Encoding)"
+                        ],
+                correct: 2,
+                explanation: "正則化(如 L1、L2)透過在損失函數中加入懲罰項來控制模型複雜度。"
+            },
+            {
+                category: "科目一",
+                question: "下列哪一項任務最適合使用「非監督式學習(Unsupervised Learning)」來處理?",
+                options: ["根據已標記的醫療影像診斷疾病。", "根據歷史房價數據預測未來房價。", "根據消費者的購買行為將其自動分群。", "透過獎勵機制訓練電腦玩圍棋。"],
+                correct: 2,
+                explanation: "非監督式學習不依賴標籤，其核心在於發掘資料內在結構，例如分群。"
+            },
+            {
+                category: "科目一",
+                question: "關於鑑別式 AI 與生成式 AI 的差異，下列敘述何者正確?",
+                options: ["生成式 AI 的主要目標是進行分類與預測。", "鑑別式 AI 側重於學習數據的聯合分佈以產生新樣本。", "鑑別式 AI 專注於學習數據特徵與標籤之間的邊界。", "生成式 AI 不會產生新的數據，僅能分析現有數據。"],
+                correct: 2,
+                explanation: "鑑別式 AI 專注於尋找分類邊界；生成式 AI 則專注於學習數據分佈並生成新內容。"
+            },
+            {
+                category: "科目一",
+                question: "某公司建置了基於檢索增強生成(RAG)的系統，其主要優勢為何?",
+                options: ["可以完全取代大型語言模型的推理能力。", "允許模型在回答時檢索外部數據源中的即時資訊，減少幻覺並提升準確度。", "可以大幅縮短模型的推論與回應時間。", "不需要任何外部資料庫即可運作。"],
+                correct: 2,
+                explanation: "RAG 結合了檢索與生成，能補足模型知識的時效性與準確性。但因增加了檢索步驟，通常會比單純問 AI 稍微慢一些"
+            },
+            {
+                category: "科目二",
+                question: "關於 No Code 與 Low Code 平台的敘述，下列何者最準確?",
+                options: ["Low Code 平台完全不需要任何程式設計知識。", "No Code 平台主要面向非技術使用者，透過拖拉元件即可開發應用。", "兩者都只能開發非常簡單的靜態網頁。", "Low Code 平台無法與企業現有的 CRM 或 ERP 系統整合。"],
+                correct: 1,
+                explanation: "No Code 適合非技術人員快速開發；Low Code 則結合視覺化工具與少量程式碼，適合開發者進行更複雜或客製化的功能，且通常具備系統整合能力。"
+            },
+            {
+                category: "科目二",
+                question: "在使用生成式 AI 解決數學或邏輯問題時，為了提升準確度，可以使用下列哪種提示工程(Prompt Engineering)技巧?",
+                options: [" 要求 AI 用一句話簡短回答。", "思維鏈(Chain-of-Thought)，要求 AI 詳細列出每一個思考步驟。",
+                            "提高溫度參數(Temperature)以增加隨機性。", " 僅提供關鍵字，不給予完整指令。"
+                ],
+                correct: 1,
+                explanation: "Chain-of-Thought(CoT)能引導模型逐步推理，有效提升解決複雜邏輯或數學問題的準確性"
+            },
+            {
+                category: "科目二",
+                question: "企業導入生成式 AI 時，若希望驗證技術在真實業務場景中的可行性與效果，通常會進行哪一個階段?",
+                options: ["概念驗證(Proof of Concept, POC)。", "大規模全面部署。", "採購硬體設備。", "員工全面裁員"],
+                correct: 0,
+                explanation: "POC 階段是透過小規模實驗測試，評估模型效能與業務融合度，確認具有商業價值後才進行擴大導入。"
+            },
+            {
+                category: "科目二",
+                question: "生成式 AI 可能會產生看似合理但實際上錯誤或虛構的資訊，這種現象稱為什麼?",
+                options: ["過度擬合(Overfitting)。","梯度消失(Vanishing Gradient)。","幻覺(Hallucination)。","數據漂移(Data Drift)。"],
+                correct: 2,
+                explanation: " 幻覺(Hallucination)是大型語言模型常見的風險，指模型生成內容通順但缺乏真實依據或完全虛構。"
+            },
+            {
+                category: "科目二",
+                question: "根據 AI 導入的風險管理，若企業將資料去識別化後再進行處理，主要是為了降低哪一類風險?",
+                options: ["隱私與資安風險。","模型效能不足風險。","運算資源不足風險。","員工抗拒風險。"],
+                correct: 0,
+                explanation: "資料去識別化(Data Anonymization)或差分隱私技術，主要是為了保護敏感個資，符合隱私法規(如 GDPR)並降低資安風險。"
+            },
+            {
+                category: "科目一",
+                question: "在訓練機器學習模型時，為了防止模型過度學習訓練數據中的雜訊和細節，導致其在未見過的新數據上表現不佳的「過擬合」(Overfitting)現象，下列哪種策略是有效的?",
+                options: ["在損失函數中添加懲罰項，如L1或L2正則化","僅使用訓練資料來評估模型最終的效能","延長模型的訓練時間，直到訓練誤差趨近於零","增加模型的複雜度，例如增加神經網路的層數"],
+                correct: 0,
+                explanation: "在損失函數中添加懲罰項，如L1或L2正則化，可以有效防止模型過度學習訓練數據中的雜訊和細節，從而提升其泛化能力。"
+            },
+            {
+                category: "科目一",
+                question: "一個AI模型被訓練來辨識一封電子郵件是「垃圾郵件」還是「非垃圾郵件」。這個模型的首要任務是學習這兩類郵件之間的決策邊界。此模型屬於哪一種類型的AI?",
+                options: ["鑑別式AI","分辨型AI","強化式AI","生成式AI"],
+                correct: 0,
+                explanation: "鑑別式AI的核心是「判斷」，生成式AI的核心是「創造」，這準確描述了兩者的根本差異。"
+            },
+            {
+                category: "科目一",
+                question: "在處理影像辨識任務時，哪一種深度學習模型因其特殊的結構(如卷積層與池化層)，能夠有效提取影像中的空間特徵(如邊緣、紋理)，而被廣泛應用?",
+                options: ["卷積神經網路(Convolutional Neural Networks, CNN)","循環神經網路(Recurrent Neural Networks, RNN)","生成對抗網路(Generative Adversarial Networks, GAN)","變分自編碼器(Variational Autoencoders, VAE)"],
+                correct: 0,
+                explanation: "CNN的卷積層和池化層結構使其特別擅長捕捉影像的局部特徵和空間層次結構，是影像辨識的經典模型。"
+            },
+            {
+                category: "科目一",
+                question: "在資料前處理階段，資料清洗是提升資料品質的關鍵步驟。下列何者是處理資料中「遺缺值(Missing Value)」的常見方法?",
+                options: ["使用平均值、中位數或眾數進行填補","檢測並修正拼寫錯誤等錯誤值","使用主成分分析(PCA)進行降維","將所有資料進行Z-score標準化"],
+                correct: 0,
+                explanation: "根據資料的特性，使用統計量(如平均值、中位數)來填補遺缺值是一種直接且常用的資料清洗策略。"
+            },
+            {
+                category: "科目一",
+                question: "生成對抗網路(GAN)是由哪兩個相互競爭的神經網路組成的?",
+                options: ["生成器(Generator)和判別器(Discriminator)","代理(Agent)和環境(Environment)","卷積層(Convolutional Layer)和池化層(Pooling Layer)","編碼器(Encoder)和解碼器(Decoder)"],
+                correct: 0,
+                explanation: "GAN的核心思想是生成器努力生成逼真數據來「欺騙」判別器，而判別器則努力區分真實與生成數據。"
+            },
+            {
+                category: "科目一",
+                question: "隨機森林(Random Forest)模型相較於單一的決策樹模型，其主要的優勢是什麼?",
+                options: ["透過集成學習降低過擬合風險，提升穩定性","訓練速度更快","能夠處理非結構化數據，如音訊","模型的可解釋性更高"],
+                correct: 0,
+                explanation: "透過構建多棵在不同數據子集上訓練的決策樹並進行投票或平均，隨機森林能夠有效減少單一決策樹易受數據雜訊影響而過擬合的問題。"
+            },
+            {
+                category: "科目一",
+                question: "在資料處理與分析的架構中，ETL流程代表什麼?",
+                options: ["萃取(Extract)、轉換(Transform)、載入(Load)","加密(Encrypt)、傳輸(Transmit)、紀錄(Log)","探索(Explore)、測試(Test)、載入(Load)","評估(Evaluate)、轉換(Transform)、學習(Learn)"],
+                correct: 0,
+                explanation: "ETL是資料倉儲和資料處理中的一個核心流程，指的是從來源萃取資料，進行清洗和轉換，最後載入到目標資料庫或系統中。"
+            },
+            {
+                category: "科目一",
+                question: "循環神經網路(RNN)特別適合處理序列數據，但其訓練過程容易出現梯度消失或爆炸問題。下列哪一項是為了解決此問題而提出的改進版本?",
+                options: ["長短期記憶網路(LSTM)","卷積神經網路(CNN)","生成對抗網路(GAN)","支援向量機(SVM)"],
+                correct: 0,
+                explanation: "LSTM透過引入遺忘門、輸入門和輸出門等門控機制，能有效捕捉長期依賴關係，並緩解梯度消失問題。"
+            },
+            {
+                category: "科目一",
+                question: "在機器學習流程中，為了避免模型在訓練資料上表現優異，但在測試資料上表現不佳的「過擬合」現象，下列何者是「不」常見的防範策略?",
+                options: ["增加模型的層數與複雜度以捕捉更多特徵","透過隨機旋轉、翻轉等方式擴展訓練數據集(Data Augmentation)","在損失函數中添加L1或L2正則化(Regularization)","當模型在驗證集上的表現開始下降時，提早停止訓練(Early Stopping)"],
+                correct: 0,
+                explanation: "增加模型的複雜度反而更容易導致過擬合，因為模型有能力學習到訓練數據中更多的雜訊和不具泛化性的細節。"
+            },
+            {
+                category: "科目一",
+                question: "在機器學習的資料處理階段，使用 Z-score 標準化的主要目的是什麼?",
+                options: ["將不同量級的特徵轉換到統一的範圍，消除尺度差異。","將所有數據映射到 0 到 1 的區間內。","減少資料集的維度以提高計算效率。","處理資料集中的遺缺值和重複值。"],
+                correct: 0,
+                explanation: "標準化的核心目的就是消除不同特徵因單位或量級不同所帶來的影響，使模型能公平對待所有特徵。"
+            },
+            {
+                category: "科目一",
+                question: "在非監督式學習中，K-均值聚類(K-Means)演算法的「K」值代表什麼意義?",
+                options: ["使用者預先指定的群組(clusters)數量。","演算法需要迭代的總次數。","模型中每個群組的最小樣本數。","數據集中特徵(features)的數量。"],
+                correct: 0,
+                explanation: "在 K-Means 中，K 是一個超參數，代表使用者希望將數據集劃分為多少個群組。"
+            },
+            {
+                category: "科目一",
+                question: "下列何者最適合訓練電腦下圍棋、自動駕駛等動態重複地互動的問題? ",
+                options: ["監督式學習(Supervised Learning)", "非監督式學習(Unsupervised Learning)", "半監督式學習(Semi-supervised Learning)", "強化學習(Reinforcement Learning)"],
+                correct: 3,
+                explanation: "強化學習(Reinforcement Learning, RL)是一種機器學習方法，"+
+                "讓代理(Agent)透過與環境不斷互動，學習到一系列動作，以最大化累積獎勵。"+
+                "這種學習方式非常適合用於訓練電腦在動態、複雜的環境中做出決策，例如下圍棋、自動駕駛等。"
+            },
+            {
+                category: "科目一",
+                question: "在分析一個地區的家庭年收入數據時，若數據中包含少數億萬富翁的極端高收入值，使用哪一個統計量來描述該地區的「典型」收入水平最能避免結果被扭曲?",
+                options: ["中位數","平均數","眾樹","標準差"],
+                correct: 0,
+                explanation: "中位數是將所有數據排序後取中間值，因此它不受極端值的影響，能更好地反映資料的中心趨勢。"
+            },
+            {
+                category: "科目一",
+                question: "在機器學習模型訓練前，對不同特徵(例如年齡範圍為18-65，月收入範圍為25,000-250,000)進行數據標準化或正規化的主要目的是什麼?",
+                options: ["消除不同特徵之間的尺度差異，以提升模型訓練效果","填補資料集中缺失的值","減少資料集的維度以加快計算速度","將連續型數據轉換為離散的類別。"],
+                correct: 0,
+                explanation: "標準化或正規化可以消除不同特徵之間的尺度差異，使模型訓練更穩定且收斂更快。"
+            },
+            {
+                category: "科目一",
+                question: "某個AI系統被設計來玩一款迷宮遊戲，它透過不斷嘗試不同的路徑，並根據「找到出口」或「撞到牆壁」等回饋來學習最佳策略。這種學習方式最符合哪一種類型的機器學習?",
+                options: ["強化學習(Reinforcement Learning)","非監督式學習","監督式學習","深度學習(Deep Learning)"],
+                correct: 0,
+                explanation: "強化學習(Reinforcement Learning, RL)是一種機器學習方法，讓代理(Agent)透過與環境不斷互動，學習到一系列動作，以最大化累積獎勵。這種學習方式非常適合用於訓練電腦在動態、複雜的環境中做出決策，例如下圍棋、自動駕駛等。"
+            },
+            {
+                category: "科目一",
+                question: "在深度學習領域中，哪一種神經網路模型因其能夠記憶序列中先前的資訊，特別適合處理和分析如文本翻譯、語音辨識等具有時間序列特性的資料?",
+                options: ["循環神經網路(RNN)","卷積神經網路(CNN)","支援向量機(SVM)","生成對抗網路(GAN)"],
+                correct: 0,
+                explanation: "循環神經網路(RNN)的結構中存在循環連結，因其具有記憶功能，能處理序列數據並捕捉時間上的依賴關係，特別適合處理如文本翻譯、語音辨識等具有時間序列特性的任務。"
+            },
+            {
+                category: "科目一",
+                question: "關於鑑別式AI(Discriminative AI)與生成式AI(Generative AI)的主要目標，下列敘述何者最為貼切?",
+                options: ["鑑別式AI學習數據的潛在分佈以創造新內容，生成式AI學習數據的決策邊界以進行分類。","兩者都專注於數據分類，但生成式AI的準確率通常更高。","鑑別式AI專注於學習如何區分不同類別的數據，而生成式AI專注於學習如何產生新的數據。","鑑別式AI只能處理結構化數據，而生成式AI專為非結構化數據設計。"],
+                correct: 2,
+                explanation: "鑑別式AI的核心是「判斷」，生成式AI的核心是「創造」，這準確描述了兩者的根本差異。"
+            },
+            {
+                category: "科目一",
+                question: "關於AI的定義，下列敘述何者較為正確？",
+                options: ["AI僅限於深度學習技術","AI包括各種技術，例如機器學習、專家系統等","AI系統只能在學術研究中應用","AI無法應用於金融領域"],
+                correct: 1, //B
+                explanation: "人工智慧（AI）就像是一個龐大的拼圖，由許多不同的技術碎片組成。這些技術各司其職，共同構成了我們所理解的人工智慧。（A）不限於深度學習，還有機器學習、演算法等。（C）不只限制於特定的研究、金融領域，在各領域都有許多AI的應用，如：醫學、交通等。"
+            },
+            {
+                category: "科目一",
+                question: "為了提升AI系統的透明性，下列哪種措施是適當的？ ",
+                options: ["不需對外揭露任何有關AI系統的資訊","規劃透過發布報告、技術文件或網站揭露AI系統的相關資訊","僅對內部員工進行透明性說明","將所有AI系統資訊保密"],
+                correct: 1, //B
+                explanation: "透過定期或不定期發佈AI系統於各決策環節的決策流程，有助於提昇 AI 系統的透明性。"
+            },
+            {
+                category: "科目一",
+                question: "下列何者不適合做為資料分布估計？",
+                options: ["直方圖（Histogram）","散布圖（Scatter plot）","雷達圖（Radar chart）","四分位數（Quartile）"],
+                correct: 2, //C
+                explanation: "雷達圖有幾個限制，無法直觀呈現機率密度：雷達圖主要用於比較不同個體在多個維度上的表現，而非呈現數據在每個維度上的分布情況。要了解數據在某個維度上的集中程度、分散程度等，需要更適合的圖形，如直方圖。"
+            },
+            {
+                category: "科目一",
+                question: "K-Means 聚類算法中，K代表什麼？",
+                options: ["數據集中特徵的數量","數據集中樣本的數量","所需劃分的群組數量","迭代次數"],
+                correct: 2, //C
+                explanation: "K 在 K-Means 演算法中代表我們希望將數據分為幾個群組。K 值的選擇會直接影響最終的聚類結果，因此是一個非常重要的參數。"
+            },
+            {
+                category: "科目一",
+                question: "深度學習模型中，下列哪一項通常用來降低過擬合問題？",
+                options: ["增加訓練數據量","增加模型的複雜度","增加學習率","增加正則化項"],
+                correct: 3, //D
+                explanation: "過擬合指的是模型過度學習訓練數據中的雜訊或特徵，導致在測試集上表現不佳。正則化是一種在模型中加入額外項來懲罰複雜模型的方法，常見的正則化項有L1正則化和L2正則化。增加正則化項可以使模型變得更簡單，降低過擬合的風險，提高模型的泛化能力。 "
+            },
+            {
+                category: "科目一",
+                question: "生成式人工智慧最核心的能力是什麼？",
+                options: ["從大量數據中學習", "執行複雜的數學計算", "生成新的、原創的內容", "控制機器人"],
+                correct: 2, //C
+                explanation: "：生成式AI的最大特徵就是能夠生成全新的文本、圖像、音樂等內容。這與傳統的AI主要用於分析或預測已有數據不同。生成式 AI透過學習大量數據的模式，能產生出具有創造性的輸出。"
+            },
+            {
+                category: "科目一",
+                question: "下列哪項技術是生成式AI發展的重要基礎？",
+                options: ["決策樹","神經網路","線性迴歸","貝氏分類"],
+                correct: 1, //B
+                explanation: "神經網路，尤其是深度學習模型，是生成式AI的基石。這些模型能夠學習數據中的複雜模式，並生成與訓練數據相似但又不完全相同的新的數據。其他選項如決策樹、線性迴歸和貝氏分類雖然也是機器學習的重要方法，但並不擅長生成新的內容。"
+            },
+            {
+                category: "科目一",
+                question: "關於AI，下列敘述何者較為正確？",
+                options: ["AI僅限於深度學習技術","AI包括各種技術，例如機器學習、專家系統等","AI系統只能在學術研究中應用","AI無法應用於金融領域"],
+                correct: 1, //B
+                explanation: "：AI是一個廣泛的領域，涵蓋了多種技術，包括但不限於機器學習、深度學習、專家系統、自然語言處理和計算機視覺等。它不僅限於深度學習，也不僅侷限於學術研究，且已成功應用於金融、醫療、製造等多個領域。"
+            },
+            {
+                category: "科目一",
+                question: "在 AI治理中，下列何者是國際合作的重要性？",
+                options: ["統一AI發展標準","避免AI技術的濫用","促進AI技術的轉移","以上皆是"],
+                correct: 3, //D
+                explanation: "：在AI治理中，國際合作的重要性包含多個方面，主要包括：統一AI發展標準，確保不同國家在技術應用上的一致性和互操作性。避免AI技術的濫用，透過跨國監管和政策協調減少倫理與安全風險。促進AI技術的轉移，幫助各國共享技術資源，縮小數位鴻溝。因此，以上選項都屬於國際合作的重要性。"
+            },
+            {
+                category: "",
+                question: "",
+                options: ["","","",""],
+                correct: 0,
+                explanation: ""
+            },
+            {
+                category: "",
+                question: "",
+                options: ["","","",""],
+                correct: 0,
+                explanation: ""
+            },
+            {
+                category: "",
+                question: "",
+                options: ["","","",""],
+                correct: 0,
+                explanation: ""
+            },
+            {
+                category: "",
+                question: "",
+                options: ["","","",""],
+                correct: 0,
+                explanation: ""
+            },
+            {
+                category: "",
+                question: "",
+                options: ["","","",""],
+                correct: 0,
+                explanation: ""
+            },
+            {
+                category: "",
+                question: "",
+                options: ["","","",""],
+                correct: 0,
+                explanation: ""
+            },
+            {
+                category: "",
+                question: "",
+                options: ["","","",""],
+                correct: 0,
+                explanation: ""
+            },
+            //////////
+            // /////// 以下內容我不確定試科目一還是科目二
+            {
+                category: "",
+                question: "在處理一個包含使用者評論、產品圖片和銷售紀錄表格的資料庫時，這三種資料分別最貼切地對應到哪三種類型的資料結構?",
+                options: ["非結構化資料、非結構化資料、結構化資料","半結構化資料、非結構化資料、結構化資料","結構化資料、半結構化資料、非結構化資料","非結構化資料、結構化資料、半結構化資料"],
+                correct: 0,
+                explanation: "使用者評論和圖片缺乏固定的格式，屬於非結構化資料；而銷售紀錄表格具有明確的行列定義，是典型的結構化資料。"
+            },
+            {
+                category: "",
+                question: "某公司發現上季度的銷售額突然下降，分析師為了探究「為什麼會發生」，從總銷售額開始，逐層深入到地區、產品類別，最後到特定門市。這種分析方法屬於哪一種類型?",
+                options: ["探索性分析","診斷性分析","預測性分析","敘述性分析"],
+                correct: 1,
+                explanation: "診斷性分析是用來探究問題發生的原因，透過深入分析數據找出導致異常的關鍵因素。"
+            },
+            {
+                category: "",
+                question: "生成對抗網路(GAN)是透過兩個神經網路的相互競爭來學習。其中，生成器(Generator)的目標是什麼?",
+                options: ["生成與真實數據相似的新樣本","最小化模型在標記數據上的預測錯誤","準確地將輸入數據分類","將高維度數據壓縮到低維度空間"],
+                correct: 0,
+                explanation: "生成器的任務是學習真實數據的分佈，並產生讓判別器無法分辨真偽的新樣本。"
+            },
+            {
+                category: "",
+                question: "",
+                options: ["","","",""],
+                correct: 0,
+                explanation: ""
+            },
+            {
+                category: "",
+                question: "",
+                options: ["","","",""],
+                correct: 0,
+                explanation: ""
+            },
         ];
 
         let state = {
             currentIndex: 0,
             score: 0,
             userAnswers: [],
-            sessionQuestions: [] // 存放本輪打亂後的題目
+            sessionQuestions: [],
+            manageCategory: categories[0] // 當前管理的科目
         };
 
-        window.onload = () => renderHome();
+        window.onload =()=> renderHome();
 
-        // 洗牌演算法
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
+        // 工具：洗牌
+        function shuffleArray(array){
+            for(let i = array.length - 1; i > 0; i--){
+                const j = Math.floor(Math.random()*(i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
             return array;
         }
 
-        // 更新導航欄
-        function updateHeader(isQuiz) {
-            const header = document.getElementById('header-content');
-            if (isQuiz) {
-                header.innerHTML = `
-                    <h1 class="text-lg font-bold tracking-wider">專業測驗進行中</h1>
-                    <button onclick="renderHome()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition flex items-center gap-1 border border-white/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
+        // 更新頂部按鈕
+        function updateHeader(view){
+            const nav = document.getElementById('header-nav');
+            const title = document.getElementById('main-title');
+            
+            if(view === 'quiz'){
+                title.innerText = "正在測驗...";
+                nav.innerHTML = `
+                    <button onclick="renderHome()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition border border-white/20">
+                        返回首頁
+                    </button>
+                `;
+            } else if(view === 'manage'){
+                title.innerText = "題庫管理中心";
+                nav.innerHTML = `
+                    <button onclick="renderHome()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition border border-white/20">
                         返回首頁
                     </button>
                 `;
             } else {
-                header.innerHTML = `
-                    <h1 class="text-lg font-bold tracking-wider flex-1 text-center">AI 應用規劃師測驗系統</h1>
+                title.innerText = "AI 應用規劃師測驗系統";
+                nav.innerHTML = `
+                    <button onclick="renderManage()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition border border-white/20">
+                        管理題庫
+                    </button>
                 `;
             }
         }
 
-        function renderHome() {
-            updateHeader(false);
+        // --- 視圖：首頁 ---
+        function renderHome(){
+            updateHeader('home');
             const container = document.getElementById('view-container');
             container.innerHTML = `
-                <div class="text-center py-10 fade-in">
-                    <div class="mb-8 inline-flex p-5 bg-indigo-50 rounded-full text-indigo-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <div class="text-center py-6 fade-in">
+                    <div class="mb-6 inline-flex p-4 bg-indigo-50 rounded-full text-indigo-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.628.285a2 2 0 01-1.586 0l-.628-.285a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547V18.5a2 2 0 001.022.547l2.387.477a6 6 0 003.86-.517l.628-.285a2 2 0 011.586 0l.628.285a6 6 0 003.86.517l2.387-.477a2 2 0 001.022-.547V15.428z" />
                         </svg>
                     </div>
-                    <h2 class="text-3xl font-black text-gray-800 mb-4">隨機模擬挑戰</h2>
-                    <p class="text-gray-500 mb-10 text-lg">每次測驗的<span class="text-indigo-600 font-bold">題目順序</span>與<span class="text-indigo-600 font-bold">選項位置</span>皆會重新隨機排列。</p>
-                    <button onclick="startQuiz()" class="w-full sm:w-64 bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200">
-                        立即開始
-                    </button>
+                    <h2 class="text-2xl font-black text-gray-800 mb-2">請選擇測驗科目</h2>
+                    <p class="text-gray-500 mb-8">選擇一個科目開始隨機挑戰</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        ${categories.map(cat => {
+                            const count = questionBank.filter(q => q.category === cat).length;
+                            return `
+                                <button onclick="startQuiz('${cat}')" class="group p-6 bg-white border-2 border-gray-100 rounded-2xl hover:border-indigo-500 hover:bg-indigo-50 transition-all text-left shadow-sm">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-indigo-600 font-bold">${cat}</span>
+                                        <span class="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full">${count} 題</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400">包含隨機題目與選項洗牌</p>
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
                 </div>
             `;
         }
 
-        function startQuiz() {
+        // --- 視圖：題庫管理 ---
+        function renderManage(){
+            updateHeader('manage');
+            const container = document.getElementById('view-container');
+            const filteredQuestions = questionBank.filter(q => q.category === state.manageCategory);
+
+            container.innerHTML = `
+                <div class="fade-in space-y-6">
+                    <!-- 科目切換標籤 -->
+                    <div class="flex border-b border-gray-200">
+                        ${categories.map(cat => `
+                            <button onclick="switchManageTab('${cat}')" class="flex-1 py-3 font-bold transition-all ${state.manageCategory === cat ? 'tab-active' : 'text-gray-400 hover:text-gray-600'}">
+                                ${cat}
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <!-- 新增區塊 -->
+                    <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-gray-700">新增題目到「${state.manageCategory}」</h3>
+                        </div>
+                        <input id="new-q-text" type="text" placeholder="題目內容" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 border-gray-300">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <input id="opt-0" type="text" placeholder="選項 A" class="p-2 border rounded-lg border-gray-300">
+                            <input id="opt-1" type="text" placeholder="選項 B" class="p-2 border rounded-lg border-gray-300">
+                            <input id="opt-2" type="text" placeholder="選項 C" class="p-2 border rounded-lg border-gray-300">
+                            <input id="opt-3" type="text" placeholder="選項 D" class="p-2 border rounded-lg border-gray-300">
+                        </div>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <select id="correct-idx" class="p-2 border rounded-lg border-gray-300 text-sm">
+                                <option value="0">正確答案：A</option>
+                                <option value="1">正確答案：B</option>
+                                <option value="2">正確答案：C</option>
+                                <option value="3">正確答案：D</option>
+                            </select>
+                            <button onclick="addQuestion()" class="flex-1 bg-green-600 text-white py-2 rounded-xl font-bold hover:bg-green-700 transition shadow-md">加入題庫</button>
+                        </div>
+                        <textarea id="new-q-exp" placeholder="答案解析(選填)" class="w-full p-2 border rounded-lg border-gray-300 text-sm h-16"></textarea>
+                    </div>
+
+                    <!-- 列表區塊 -->
+                    <div class="space-y-3">
+                        <h3 class="font-bold text-gray-700 px-1">現有題目(${filteredQuestions.length})</h3>
+                        <div class="max-h-[300px] overflow-y-auto space-y-2 pr-2">
+                            ${filteredQuestions.length === 0 ? '<p class="text-center text-gray-400 py-8 italic">此科目尚無題目</p>' : 
+                                filteredQuestions.map((q, idx)=> {
+                                    // 找出原始題庫中的索引以利刪除
+                                    const originalIdx = questionBank.findIndex(item => item === q);
+                                    return `
+                                        <div class="bg-white p-4 border border-gray-100 rounded-xl flex justify-between items-start hover:shadow-sm transition">
+                                            <div class="flex-1 pr-4">
+                                                <p class="text-sm font-bold text-gray-800">${idx + 1}. ${q.question}</p>
+                                                <p class="text-xs text-indigo-500 mt-1">正確答案：${q.options[q.correct]}</p>
+                                            </div>
+                                            <button onclick="deleteQuestion(${originalIdx})" class="text-gray-300 hover:text-red-500 transition p-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    `;
+                                }).join('')
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function switchManageTab(cat){
+            state.manageCategory = cat;
+            renderManage();
+        }
+
+        // --- 功能：測驗邏輯 ---
+        function startQuiz(category){
+            const pool = questionBank.filter(q => q.category === category);
+            if(pool.length === 0){
+                alert('該科目目前沒有題目，請先新增題目。');
+                return;
+            }
+
             // 1. 打亂題目順序
-            let shuffledQuestions = shuffleArray([...questionBank]);
+            let shuffledPool = shuffleArray([...pool]);
 
-            // 2. 對每一題的「選項」進行打亂，並重新標記正確答案
-            state.sessionQuestions = shuffledQuestions.map(q => {
-                let optionsWithMeta = q.options.map((text, idx) => ({
-                    text: text,
-                    isCorrect: idx === q.correct
-                }));
-
-                // 打亂選項
-                shuffleArray(optionsWithMeta);
-
+            // 2. 打亂每題選項順序
+            state.sessionQuestions = shuffledPool.map(q => {
+                let meta = q.options.map((t, i)=>({ text: t, isCorrect: i === q.correct }));
+                shuffleArray(meta);
                 return {
+                    category: q.category,
                     question: q.question,
-                    options: optionsWithMeta.map(o => o.text),
-                    correct: optionsWithMeta.findIndex(o => o.isCorrect),
-                    explanation: q.explanation
+                    options: meta.map(m => m.text),
+                    correct: meta.findIndex(m => m.isCorrect),
+                    explanation: q.explanation || "無詳細解析。"
                 };
             });
 
             state.currentIndex = 0;
             state.score = 0;
             state.userAnswers = [];
-            
-            updateHeader(true);
+            updateHeader('quiz');
             renderQuestion();
         }
 
-        function renderQuestion() {
+        function renderQuestion(){
             const container = document.getElementById('view-container');
             const q = state.sessionQuestions[state.currentIndex];
-            const progress = ((state.currentIndex + 1) / state.sessionQuestions.length) * 100;
+            const progress =((state.currentIndex + 1)/ state.sessionQuestions.length)* 100;
 
             container.innerHTML = `
-                <div class="fade-in space-y-8">
-                    <!-- 進度與指示 -->
-                    <div>
-                        <div class="flex justify-between text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">
-                            <span>Question ${state.currentIndex + 1} / ${state.sessionQuestions.length}</span>
-                            <span class="text-indigo-400">Randomized Mode</span>
+                <div class="fade-in space-y-6">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="text-xs font-bold text-indigo-500 uppercase tracking-widest">${q.category}</span>
+                            <h2 class="text-xl font-bold text-gray-800 mt-1">第 ${state.currentIndex + 1} 題</h2>
                         </div>
-                        <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                            <div class="bg-indigo-600 h-full transition-all duration-700 ease-in-out" style="width: ${progress}%"></div>
-                        </div>
+                        <span class="text-xs text-gray-400 font-bold">${state.currentIndex + 1} / ${state.sessionQuestions.length}</span>
+                    </div>
+                    
+                    <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                        <div class="bg-indigo-600 h-full transition-all duration-500" style="width: ${progress}%"></div>
                     </div>
 
-                    <!-- 題目 -->
-                    <div class="py-2">
-                        <h2 class="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed">${q.question}</h2>
-                    </div>
+                    <p class="text-lg font-medium text-gray-700 leading-relaxed min-h-[60px]">${q.question}</p>
 
-                    <!-- 選項 -->
-                    <div class="grid grid-cols-1 gap-4">
-                        ${q.options.map((opt, i) => `
-                            <button onclick="handleAnswer(${i})" class="option-btn group text-left p-5 border-2 border-gray-100 rounded-2xl hover:border-indigo-500 hover:bg-indigo-50 transition-all flex items-center bg-white shadow-sm">
+                    <div class="grid grid-cols-1 gap-3 pt-2">
+                        ${q.options.map((opt, i)=> `
+                            <button onclick="handleAnswer(${i})" class="option-btn group text-left p-4 border-2 border-gray-100 rounded-2xl hover:border-indigo-500 hover:bg-indigo-50 transition-all flex items-center bg-white">
                                 <span class="w-10 h-10 rounded-xl bg-gray-50 text-gray-400 flex items-center justify-center mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors font-black">
                                     ${String.fromCharCode(65 + i)}
                                 </span>
-                                <span class="text-gray-700 font-medium text-lg leading-snug">${opt}</span>
+                                <span class="text-gray-700 font-medium">${opt}</span>
                             </button>
                         `).join('')}
                     </div>
@@ -258,12 +647,12 @@
             `;
         }
 
-        function handleAnswer(idx) {
+        function handleAnswer(idx){
             const q = state.sessionQuestions[state.currentIndex];
             state.userAnswers.push(idx);
-            if (idx === q.correct) state.score++;
+            if(idx === q.correct)state.score++;
 
-            if (state.currentIndex < state.sessionQuestions.length - 1) {
+            if(state.currentIndex < state.sessionQuestions.length - 1){
                 state.currentIndex++;
                 renderQuestion();
             } else {
@@ -271,46 +660,37 @@
             }
         }
 
-        function renderResult() {
-            updateHeader(false);
+        function renderResult(){
+            updateHeader('home');
             const container = document.getElementById('view-container');
             const total = state.sessionQuestions.length;
-            const score = Math.round((state.score / total) * 100);
+            const score = Math.round((state.score / total)* 100);
             
             container.innerHTML = `
-                <div class="fade-in space-y-8 py-2">
+                <div class="fade-in space-y-8">
                     <div class="text-center">
-                        <h2 class="text-xl font-bold text-gray-400 mb-2 uppercase tracking-tighter">Test Completed</h2>
-                        <div class="inline-block relative mb-4">
-                            <span class="text-7xl font-black text-indigo-600">${score}</span>
-                            <span class="text-gray-400 font-bold text-lg ml-1">分</span>
-                        </div>
-                        <p class="text-gray-500">本輪答對 ${state.score} 題 / 共 ${total} 題</p>
+                        <p class="text-xs font-bold text-gray-400 uppercase">測驗結束</p>
+                        <h2 class="text-7xl font-black text-indigo-600 my-4">${score}</h2>
+                        <p class="text-gray-500">答對 ${state.score} 題 / 共 ${total} 題</p>
                     </div>
 
-                    <div class="space-y-6">
-                        <h3 class="text-lg font-bold text-gray-800 flex items-center gap-2 px-2">
-                            <span class="w-1.5 h-6 bg-indigo-600 rounded-full"></span> 詳細解析回顧
-                        </h3>
-                        <div class="space-y-4 max-h-[380px] overflow-y-auto pr-2">
-                            ${state.sessionQuestions.map((q, i) => {
+                    <div class="space-y-4">
+                        <h3 class="font-bold text-gray-800 border-l-4 border-indigo-600 pl-3">詳細解析</h3>
+                        <div class="max-h-[350px] overflow-y-auto space-y-4 pr-2">
+                            ${state.sessionQuestions.map((q, i)=> {
                                 const isCorrect = state.userAnswers[i] === q.correct;
                                 return `
-                                    <div class="p-5 rounded-2xl border-2 ${isCorrect ? 'border-green-100 bg-green-50/50' : 'border-red-100 bg-red-50/50'}">
-                                        <div class="flex justify-between items-start gap-4 mb-3">
-                                            <p class="font-bold text-gray-800 flex-1">${i + 1}. ${q.question}</p>
-                                            ${isCorrect 
-                                                ? '<span class="text-green-600 bg-green-100 px-2 py-0.5 rounded-md text-xs font-bold whitespace-nowrap">正確</span>' 
-                                                : '<span class="text-red-600 bg-red-100 px-2 py-0.5 rounded-md text-xs font-bold whitespace-nowrap">錯誤</span>'}
+                                    <div class="p-4 rounded-2xl border-2 ${isCorrect ? 'border-green-100 bg-green-50/30' : 'border-red-100 bg-red-50/30'}">
+                                        <div class="flex justify-between gap-2">
+                                            <p class="font-bold text-gray-800 text-sm">${i + 1}. ${q.question}</p>
+                                            <span class="text-[10px] font-bold px-2 py-0.5 rounded ${isCorrect ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}">${isCorrect ? '正確' : '錯誤'}</span>
                                         </div>
-                                        <div class="text-sm mb-3">
-                                            <p class="${isCorrect ? 'text-green-700' : 'text-red-700'} font-medium">
-                                                您的回答：${String.fromCharCode(65 + state.userAnswers[i])}. ${q.options[state.userAnswers[i]]}
-                                            </p>
-                                            ${!isCorrect ? `<p class="text-green-700 font-bold mt-1">正確答案：${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}</p>` : ''}
+                                        <div class="mt-2 text-xs">
+                                            <p class="text-gray-500">您的選擇：${String.fromCharCode(65 + state.userAnswers[i])}. ${q.options[state.userAnswers[i]]}</p>
+                                            ${!isCorrect ? `<p class="text-indigo-600 font-bold">正確答案：${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}</p>` : ''}
                                         </div>
-                                        <div class="bg-white/80 p-4 rounded-xl text-sm text-gray-600 leading-relaxed border border-gray-100">
-                                            <span class="font-bold text-indigo-600">解析：</span>${q.explanation}
+                                        <div class="mt-2 p-3 bg-white/50 rounded-lg text-xs text-gray-600 border border-white/80">
+                                            <span class="font-bold">解析：</span>${q.explanation}
                                         </div>
                                     </div>
                                 `;
@@ -318,16 +698,56 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-100">
-                        <button onclick="startQuiz()" class="flex-1 bg-indigo-600 text-white py-4 rounded-2xl font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-100">
-                            重新測驗 
-                        </button>
-                        <button onclick="renderHome()" class="flex-1 bg-gray-100 text-gray-600 py-4 rounded-2xl font-bold hover:bg-gray-200 transition">
-                            回到首頁
-                        </button>
+                    <div class="flex gap-3">
+                        <button onclick="renderHome()" class="flex-1 bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition">回到科目選擇</button>
                     </div>
                 </div>
             `;
+        }
+
+        // --- 功能：管理邏輯 ---
+        function addQuestion(){
+            const q = document.getElementById('new-q-text').value.trim();
+            const exp = document.getElementById('new-q-exp').value.trim();
+            const opts = [
+                document.getElementById('opt-0').value.trim(),
+                document.getElementById('opt-1').value.trim(),
+                document.getElementById('opt-2').value.trim(),
+                document.getElementById('opt-3').value.trim()
+            ];
+            const correct = parseInt(document.getElementById('correct-idx').value);
+
+            if(!q || opts.some(o => !o)){
+                alert('請填寫完整題目與四個選項內容');
+                return;
+            }
+
+            questionBank.push({
+                category: state.manageCategory,
+                question: q,
+                options: opts,
+                correct: correct,
+                explanation: exp || "無詳細解析。"
+            });
+
+            renderManage();
+        }
+
+        function deleteQuestion(originalIndex){
+            const modal = document.getElementById('custom-modal');
+            const confirmBtn = document.getElementById('modal-confirm');
+            const cancelBtn = document.getElementById('modal-cancel');
+            
+            modal.classList.remove('hidden');
+
+            const close =()=> modal.classList.add('hidden');
+            
+            confirmBtn.onclick =()=> { 
+                questionBank.splice(originalIndex, 1);
+                renderManage();
+                close(); 
+            };
+            cancelBtn.onclick = close;
         }
     </script>
 </body>
