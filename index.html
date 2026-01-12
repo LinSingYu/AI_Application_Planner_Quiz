@@ -33,6 +33,14 @@
             border-bottom: 3px solid #4f46e5;
             color: #4f46e5;
         }
+        /* 倒數計時動畫 */
+        .pulse-soft {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .8; }
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -72,6 +80,9 @@
         // 類別定義
         const categories = ["科目一", "科目二"];
 
+        // 考試日期定義
+        const EXAM_DATE = new Date('2026-03-21');
+        
         // 題庫資料(增加 category 欄位)
         let questionBank = [
             {
@@ -280,7 +291,7 @@
                 question: "關於AI的定義，下列敘述何者較為正確？",
                 options: ["AI僅限於深度學習技術","AI包括各種技術，例如機器學習、專家系統等","AI系統只能在學術研究中應用","AI無法應用於金融領域"],
                 correct: 1, //B
-                explanation: "人工智慧（AI）就像是一個龐大的拼圖，由許多不同的技術碎片組成。這些技術各司其職，共同構成了我們所理解的人工智慧。（A）不限於深度學習，還有機器學習、演算法等。（C）不只限制於特定的研究、金融領域，在各領域都有許多AI的應用，如：醫學、交通等。"
+                explanation: "人工智慧(AI)就像是一個龐大的拼圖，由許多不同的技術碎片組成。這些技術各司其職，共同構成了我們所理解的人工智慧。(A)不限於深度學習，還有機器學習、演算法等。(C)不只限制於特定的研究、金融領域，在各領域都有許多AI的應用，如：醫學、交通等。"
             },
             {
                 category: "科目一",
@@ -292,7 +303,7 @@
             {
                 category: "科目一",
                 question: "下列何者不適合做為資料分布估計？",
-                options: ["直方圖（Histogram）","散布圖（Scatter plot）","雷達圖（Radar chart）","四分位數（Quartile）"],
+                options: ["直方圖(Histogram)","散布圖(Scatter plot)","雷達圖(Radar chart)","四分位數(Quartile)"],
                 correct: 2, //C
                 explanation: "雷達圖有幾個限制，無法直觀呈現機率密度：雷達圖主要用於比較不同個體在多個維度上的表現，而非呈現數據在每個維度上的分布情況。要了解數據在某個維度上的集中程度、分散程度等，需要更適合的圖形，如直方圖。"
             },
@@ -339,39 +350,144 @@
                 explanation: "：在AI治理中，國際合作的重要性包含多個方面，主要包括：統一AI發展標準，確保不同國家在技術應用上的一致性和互操作性。避免AI技術的濫用，透過跨國監管和政策協調減少倫理與安全風險。促進AI技術的轉移，幫助各國共享技術資源，縮小數位鴻溝。因此，以上選項都屬於國際合作的重要性。"
             },
             {
-                category: "",
-                question: "",
-                options: ["","","",""],
-                correct: 0,
-                explanation: ""
+                category: "科目一",
+                question: "關於K平均法(K-means)，下列敘述何者「不」正確？",
+                options: ["希望找出k個互不交集的群集","不同的起始群集中心，可能會造成不同的分群結果","容易受雜訊與離群值(Outlier)影響其群集中心","可以處理類別型資料"],
+                correct: 3,
+                explanation: "K-means 演算法特性為隨機選取集群中心、依距離計算、各群質心為代表點、分割式分群、易受離群值影響、類別型資料集群方法。"
             },
             {
-                category: "",
-                question: "",
-                options: ["","","",""],
-                correct: 0,
-                explanation: ""
+                category: "科目一",
+                question: "在品質管理中，若一產品的生產過程中標準差顯著偏大，通常意味著什麼？",
+                options: ["資料點高度集中，產品質量穩定","生產過程波動大，產品品質不穩定","資料無法反映產品實際狀況 ","中位數數值高，品質良率較高"],
+                correct: 1,
+                explanation: "標準差越大表示數據分散程度越高，在品質管理中意味著產品或過程波動大，進而產品品質不穩定，故答案為B。"
+            },
+            // {
+            //     category: "科目一",
+            //     question: "下列何者「並非」K平均數(k-means)集群法的特點？ ",
+            //     options: ["原理相對其他集群法較為複雜","可結合其他方法，使用上較為彈性 ","在特定情況下，能將集群的任務處理得足夠好",")不適合非球形、數據密度變化大或有離群數據的集群問題"],
+            //     correct: 1,
+            //     explanation: ""
+            // },
+            {
+                category: "科目一",
+                question: "驗證性資料分析(Confirmatory Data Analysis, CDA)與探索性資料分析(Exploratory Data Analysis, EDA)相比，主要著重於下列哪一項？",
+                options: ["對資料進行初步描述和視覺化","驗證先前生成的假設並進行深入挖掘","排除資料中的極端值以提高準確性","探索數據中潛在的模式和異常"],
+                correct: 1,
+                explanation: "驗證性資料分析的重點在於檢驗先前所提出的假設，通常採用分類、分群、相關性分析或預測模型等方法進行深入分析。"
             },
             {
-                category: "",
-                question: "",
-                options: ["","","",""],
-                correct: 0,
-                explanation: ""
+                category: "科目一",
+                question: "以下哪種情況下，使用中位數來描述資料的集中趨勢最為合適？",
+                options: ["一組考試成績，大部分學生分數集中在80分左右","一組房屋價格數據，其中包含少數豪宅的極端高價 ","一組產品銷售量數據，每個產品的銷量差異不大 ","一組學生身高數據，呈現出常態分布"],
+                correct: 1,
+                explanation: "平均數：易受極端值影響。當資料中有極端值時，平均數可能會偏離資料的中心趨勢。中位數：不受極端值影響。它能更準確地反映資料的中心趨勢，特別是在資料分布不對稱或有極端值的情況下。眾數：表示資料中出現頻率最高的數值。"
             },
             {
-                category: "",
-                question: "",
-                options: ["","","",""],
-                correct: 0,
-                explanation: ""
+                category: "科目一",
+                question: "一組數據中，如果平均數小於中位數，那麼這組數據的分布可能是下列哪一種? ",
+                options: ["對稱分布","正偏態分布","負偏態分布",")無法判斷 "],
+                correct: 2,
+                explanation: "對稱分布：平均數、中位數和眾數通常會接近。正偏態分布：資料的尾巴向右邊延伸，平均數會大於中位數。負偏態分布：資料的尾巴向左邊延伸，平均數會小於中位數。 "
             },
             {
-                category: "",
-                question: "",
-                options: ["","","",""],
+                category: "科目一",
+                question: "當我們進行一次假設檢定，得到的p值為0.03，顯著性水準設定為0.05，以下哪一個敘述是正確的？",
+                options: ["我們有97%的信心拒絕虛無假設","我們有95%的信心拒絕虛無假設","我們無法拒絕虛無假設","我們有5%的機率犯型一錯誤"],
+                correct: 1,
+                explanation: "p值為0.03表示，在虛無假設為真的情況下，觀察到目前數據或更極端數據的機率是3%。換句話說，如果虛無假設是正確的，那麼得到這樣的結果是非常罕見的。顯著性水準設定為0.05表示，我們願意接受5%的風險來拒絕一個實際為真的虛無假設(即Type-I Error)。 比較p值和顯著性水準：由於0.03 < 0.05，因此我們拒絕虛無假設。這意味著，我們有95%的信心認為，觀察到的結果並非偶然，而是支持對立假設。 "
+            },
+            {
+                category: "科目一",
+                question: "一組資料中，若平均數大於中位數，則這組資料的分布可能是下列哪一種？ ",
+                options: ["對稱分布","負偏態分布","正偏態分布 ","無法判斷"],
+                correct: 2,
+                explanation: "對稱分布：平均數、中位數和眾數通常會接近；負偏態分布：資料的尾巴向左邊延伸，平均數會小於中位數；正偏態分布：資料的尾巴向右邊延伸，平均數會大於中位數。"
+            },
+            {
+                category: "科目一",
+                question: "下列哪一個敘述關於四分位距(IQR)是正確的？ ",
+                options: ["四分位距會受到極端值的影響","四分位距代表資料中所有數據的分散程度","四分位距是第三四分位數與第一四分位數的差 ","四分位距與平均數一樣，容易受到極端值影響"],
+                correct: 2,
+                explanation: "四分位距(IQR)是第三四分位數與第一四分位數的差，它代表資料中間50%數據的分散程度，不受極端值影響。"
+            },
+            {
+                category: "科目一",
+                question: "以下哪一種情況最適合用眾數來描述資料的集中趨勢？",
+                options: ["一組學生身高資料，呈現出常態分布","一組產品銷售量資料，其中一種產品的銷量遠高於其他產品","一組考試成績資料，大部分學生的分數集中在80分左右","一組房屋價格資料，其中包含少數豪宅的極端高價 "],
+                correct: 1,
+                explanation: "眾數代表資料中出現頻率最高的數值。當資料中有一個或幾個數值出現的頻率明顯高於其他數值時，眾數能較好地反映資料的集中趨勢。當一種產品的銷量遠高於其他產品時，這個產品的銷量就是眾數。這代表大多數的銷售額來自於這個產品，使用眾數能更直接地反映出最受歡迎的產品。 "
+            },
+            {
+                category: "科目一",
+                question: "機器學習的三個核心要素是什麼？",
+                options: ["數據、模型、損失函數","訓練集、測試集、驗證集 ","特徵工程、優化演算法、正則化 ","超參數調整、模型選擇、數據處理"],
                 correct: 0,
-                explanation: ""
+                explanation: "機器學習的三個核心要素分別是數據(Data)、模型(Model)和損失函數(Loss Function)，其中數據提供基礎，模型學習數據的規律，損失函數用於評估預測的準確性並指導模型優化。"
+            },
+            {
+                category: "科目一",
+                question: "下列哪一項屬於監督式學習的特點？ ",
+                options: ["數據集中包含標記訊息","僅需探索數據內部的結構 ","使用代理與環境互動進行學習","不需要驗證集來調整參數"],
+                correct: 0,
+                explanation: "監督式學習依賴有標記的數據集，透過學習輸入與輸出之間的映射關係來進行預測或分類。(B)是非監督式學習的特點，(C)是強化學習的特點。"
+            },
+            {
+                category: "科目一",
+                question: "機器學習模型過擬合的主要原因是什麼？",
+                options: ["模型的複雜度不足","訓練數據樣本過多 ","模型過度學習數據中的雜訊","使用過於簡單的損失函數 "],
+                correct: 2,
+                explanation: "過擬合通常是由於模型學習了訓練數據中的雜訊或特定模式，導致模型對測試數據泛化能力不足。"
+            },
+            {
+                category: "科目一",
+                question: "交叉驗證的主要目的是什麼？",
+                options: ["提高模型的訓練速度","驗證數據是否線性可分 ","減少模型的過擬合風險","測試模型的容錯能力"],
+                correct: 2,
+                explanation: "交叉驗證透過多次分割數據進行訓練和測試，有助於評估模型的穩健性並降低過擬合的可能性。"
+            },
+            {
+                category: "科目一",
+                question: "機器學習的梯度下降演算法主要用於什麼？",
+                options: ["減少模型的計算複雜度","優化模型參數以最小化損失函數 ","減少數據中的雜訊干擾 ","增強數據特徵的表示能力"],
+                correct: 1,
+                explanation: "梯度下降演算法是一種優化方法，透過計算損失函數相對參數的偏導數，調整模型參數使損失函數值逐漸減小。"
+            },
+            {
+                category: "科目一",
+                question: "線性迴歸模型最適合解決哪種類型的問題？",
+                options: ["圖像分類","銷售額預測 ","聚類分析 ","遊戲策略學習 "],
+                correct: 1,
+                explanation: "線性迴歸是一種典型的迴歸模型，用於解決輸出為連續值的問題，如預測銷售額或房價。"
+            },
+            {
+                category: "科目一",
+                question: "決策樹的最大優勢是什麼？",
+                options: ["適合大規模數據的訓練 ","具有良好的可解釋性","不需要進行數據標準化","適用於圖像生成任務 "],
+                correct: 1,
+                explanation: "決策樹的分支結構清晰，便於直觀解釋，因此廣泛用於需要高可解釋性的任務，如醫學診斷或風險評估。"
+            },
+            {
+                category: "科目一",
+                question: "神經網路與傳統機器學習模型的主要區別是什麼？",
+                options: ["神經網路無法處理非線性數據","神經網路透過多層結構學習複雜特徵","神經網路只適用於迴歸問題","神經網路不需要大量數據支持"],
+                correct: 1,
+                explanation: "神經網路具有多層結構，能夠從數據中提取高層次特徵，適合處理複雜的非線性問題，例如圖像分類和語音辨識。"
+            },
+            {
+                category: "科目一",
+                question: "下列關於生成對抗網路(GAN)的描述正確的是哪一項？",
+                options: ["GAN僅用於分類問題","GAN由生成器和鑑別器組成","GAN的結果始終高度可解釋","GAN不能生成高品質的數據"],
+                correct: 1,
+                explanation: "生成對抗網路(GAN)由生成器和鑑別器組成，透過對抗學習生成高品質的數據，應用於圖像生成、文本生成等任務。"
+            },
+            {
+                category: "科目一",
+                question: "隨機森林(Random Forest)改進了單一決策樹的缺陷，主要透過什麼方法實現？",
+                options: ["使用核函數映射高維空間","集成多棵隨機生成的決策樹並投票","增加模型參數以減少偏差","採用生成模型替代分類器"],
+                correct: 1,
+                explanation: "隨機森林是決策樹的集成演算法，透過構建多棵隨機決策樹並對其結果進行投票，有效降低了過擬合的風險。"
             },
             {
                 category: "",
@@ -436,6 +552,14 @@
 
         window.onload =()=> renderHome();
 
+        // 工具：計算剩餘天數
+        function getDaysRemaining() {
+            const now = new Date();
+            const diffTime = EXAM_DATE - now;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays > 0 ? diffDays : 0;
+        }
+        
         // 工具：洗牌
         function shuffleArray(array){
             for(let i = array.length - 1; i > 0; i--){
@@ -474,33 +598,51 @@
             }
         }
 
-        // --- 視圖：首頁 ---
-        function renderHome(){
+    // --- 視圖：首頁 ---
+        function renderHome() {
             updateHeader('home');
             const container = document.getElementById('view-container');
+            const daysLeft = getDaysRemaining();
+
             container.innerHTML = `
-                <div class="text-center py-6 fade-in">
-                    <div class="mb-6 inline-flex p-4 bg-indigo-50 rounded-full text-indigo-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.628.285a2 2 0 01-1.586 0l-.628-.285a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547V18.5a2 2 0 001.022.547l2.387.477a6 6 0 003.86-.517l.628-.285a2 2 0 011.586 0l.628.285a6 6 0 003.86.517l2.387-.477a2 2 0 001.022-.547V15.428z" />
-                        </svg>
+                <div class="py-2 fade-in">
+                    <!-- 倒數計時橫幅 -->
+                    <div class="mb-8 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl flex items-center justify-between shadow-sm pulse-soft">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-amber-100 p-2 rounded-lg text-amber-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-amber-800">初級 AI 應用規劃師 考試倒數</p>
+                                <p class="text-xs text-amber-600 font-bold tracking-wide">考試日期：2026 / 03 / 21</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-2xl font-black text-amber-700">${daysLeft}</span>
+                            <span class="text-xs font-bold text-amber-600 ml-0.5">DAYS</span>
+                        </div>
                     </div>
-                    <h2 class="text-2xl font-black text-gray-800 mb-2">請選擇測驗科目</h2>
-                    <p class="text-gray-500 mb-8">選擇一個科目開始隨機挑戰</p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                        ${categories.map(cat => {
-                            const count = questionBank.filter(q => q.category === cat).length;
-                            return `
-                                <button onclick="startQuiz('${cat}')" class="group p-6 bg-white border-2 border-gray-100 rounded-2xl hover:border-indigo-500 hover:bg-indigo-50 transition-all text-left shadow-sm">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <span class="text-indigo-600 font-bold">${cat}</span>
-                                        <span class="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full">${count} 題</span>
-                                    </div>
-                                    <p class="text-sm text-gray-400">包含隨機題目與選項洗牌</p>
-                                </button>
-                            `;
-                        }).join('')}
+
+                    <div class="text-center py-4">
+                        <h2 class="text-2xl font-black text-gray-800 mb-2">請選擇測驗科目</h2>
+                        <p class="text-gray-500 mb-8">選擇一個科目開始隨機挑戰</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                            ${categories.map(cat => {
+                                const count = questionBank.filter(q => q.category === cat).length;
+                                return `
+                                    <button onclick="startQuiz('${cat}')" class="group p-6 bg-white border-2 border-gray-100 rounded-2xl hover:border-indigo-500 hover:bg-indigo-50 transition-all text-left shadow-sm">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-indigo-600 font-bold">${cat}</span>
+                                            <span class="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full">${count} 題</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400">包含隨機題目與選項洗牌</p>
+                                    </button>
+                                `;
+                            }).join('')}
+                        </div>
                     </div>
                 </div>
             `;
