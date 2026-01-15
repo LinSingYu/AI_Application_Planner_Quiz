@@ -18,7 +18,7 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .option-btn:active {
+        .option-btn:active:not(:disabled) {
             transform: scale(0.98);
         }
         /* 美化捲動條 */
@@ -33,7 +33,7 @@
             border-bottom: 3px solid #4f46e5;
             color: #4f46e5;
         }
-        .pulse-soft {/* 倒數計時動畫 */
+        .pulse-soft {
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
         @keyframes pulse {
@@ -56,20 +56,20 @@
         </div>
 
         <!-- 視圖容器 -->
-        <div id="view-container" class="p-6 md:p-8 min-h-[500px]">
+        <div id="view-container" class="p-6 md:p-8 min-h-[520px]">
             <!-- 內容動態插入 -->
         </div>
 
-        <!-- 自訂對話框(Modal)-->
+        <!-- 自訂對話框 (Modal) -->
         <div id="custom-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
             <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm overflow-hidden fade-in">
                 <div class="p-6">
                     <h3 id="modal-title" class="text-lg font-bold text-gray-800 mb-2">確認操作</h3>
-                    <p id="modal-content" class="text-gray-600">您確定要執行此操作嗎?</p>
+                    <p id="modal-content" class="text-gray-600">您確定要執行此操作嗎？</p>
                 </div>
                 <div class="bg-gray-50 p-4 flex justify-end gap-3">
                     <button id="modal-cancel" class="px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-lg transition font-medium">取消</button>
-                    <button id="modal-confirm" class="px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded-lg transition font-medium">確定刪除</button>
+                    <button id="modal-confirm" class="px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded-lg transition font-medium">確定執行</button>
                 </div>
             </div>
         </div>
@@ -513,6 +513,118 @@
                 explanation: "診斷性分析是用來探究問題發生的原因，透過深入分析數據找出導致異常的關鍵因素。"
             },
             {
+                category: "科目一",
+                question: "在訓練模型時，如果模型在訓練集表現極佳，但在測試集表現極差，這種現象稱為？",
+                options: ["欠擬合（Underfitting）", "過度擬合（Overfitting）", "泛化成功", "數據偏誤"],
+                correct: 1,
+                explanation: "過度擬合是指模型學習了訓練集中的雜訊，導致對未見過的數據缺乏泛化能力。"
+            },
+            {
+                category: "科目一",
+                question: "下列何者為衡量分類模型「正確預測為正類別佔所有預測為正類別之比例」的指標？",
+                options: ["準確率（Accuracy）", "召回率（Recall）", "精確率（Precision）", "F1 分數"],
+                correct: 2,
+                explanation: "精確率（Precision）計算的是預測為正向的樣本中，真正為正向的比例。"
+            },
+            {
+                category: "科目一",
+                question: "關於 AI 倫理中的「透明性」，下列敘述何者最正確？",
+                options: ["AI 系統必須對外公開所有原始碼。", "AI 的決策過程應該在一定程度上可被解釋或追蹤。", "AI 系統不需要向用戶說明數據來源。", "AI 的開發成本必須透明化。"],
+                correct: 1,
+                explanation: "透明性強調系統的可解釋性，讓人類了解決策依據，而不一定是指公開所有技術細節。"
+            },
+            {
+                category: "科目一",
+                question: "「遷移學習（Transfer Learning）」的主要優點是什麼？",
+                options: ["可以完全不需要任何數據", "利用已訓練模型的知識，減少新任務的訓練時間與數據量", "保證模型百分之百準確", "讓模型不需要任何運算資源"],
+                correct: 1,
+                explanation: "遷移學習利用在大規模數據集上預訓練過的模型，幫助在數據較少的小任務上取得更好效果。"
+            },
+            {
+                category: "科目一",
+                question: "神經網路中，負責將輸入信號轉換為輸出信號，決定神經元是否激發的函數稱為？",
+                options: ["激勵函數（Activation Function）", "損失函數（Loss Function）", "優化函數", "線性函數"],
+                correct: 0,
+                explanation: "激勵函數（如 ReLU, Sigmoid）決定了神經元的非線性轉換與激發狀態。"
+            },
+            {
+                category: "科目一",
+                question: "透過與環境互動、獲得獎勵或懲罰來學習最佳策略的學習方式稱為？",
+                options: ["監督式學習", "非監督式學習", "強化學習（Reinforcement Learning）", "標註學習"],
+                correct: 2,
+                explanation: "強化學習的核心在於智能體（Agent）透過回饋（Reward）來優化其行為決策。"
+            },
+            {
+                category: "科目一",
+                question: "遞歸神經網路（RNN）最主要的特性是？",
+                options: ["處理靜態影像", "處理序列型數據與具備記憶效應", "運算速度比 CNN 快", "不需要任何激活函數"],
+                correct: 1,
+                explanation: "RNN 具備循環結構，能夠處理時間序列或文字序列等具備前後關係的數據。"
+            },
+            {
+                category: "科目一",
+                question: "「自然語言處理（NLP）」的核心目標是什麼？",
+                options: ["讓電腦學會畫畫", "讓電腦理解、詮釋及生成人類語言", "讓電腦預測天氣", "優化電腦硬體架構"],
+                correct: 1,
+                explanation: "NLP 專注於打破人類語言與電腦代碼之間的藩籬。"
+            },
+            {
+                category: "科目一",
+                question: "著名的「圖靈測試」主要是用來評估什麼？",
+                options: ["電腦的運算速度", "電腦是否具備與人類等同的智能表現", "電腦的安全性", "程式碼的錯誤率"],
+                correct: 1,
+                explanation: "艾倫·圖靈提出的測試方法，旨在判斷機器是否表現出讓人無法區分的智能行為。"
+            },
+            {
+                category: "科目一",
+                question: "在訓練神經網路時，「倒傳遞（Backpropagation）」演算法的主要功能是？",
+                options: ["增加數據量", "將預測結果輸出給用戶", "根據誤差計算梯度並更新神經網路中的權重", "初始化神經元參數"],
+                correct: 2,
+                explanation: "倒傳遞是訓練神經網路的核心，透過鏈鎖法則計算誤差對權重的影響（梯度）。"
+            },
+            {
+                category: "科目一",
+                question: "下列何者為常見的非線性激勵函數（Activation Function）？",
+                options: ["ReLU", "y = ax + b", "均值函數", "單位矩陣"],
+                correct: 0,
+                explanation: "ReLU（Rectified Linear Unit）是目前深度學習中最廣泛使用的非線性激勵函數。"
+            },
+            {
+                category: "科目一",
+                question: "機器學習中的「偏差（Bias）」過高通常表示模型？",
+                options: ["發生過度擬合", "過於複雜", "發生欠擬合（無法捕捉數據規律）", "運算資源不足"],
+                correct: 2,
+                explanation: "高偏差表示模型太過簡單，無法學習到數據的內在趨勢（欠擬合）。"
+            },
+            {
+                category: "科目一",
+                question: "由開發者在訓練前手動設定，而非由模型自動學習得出的參數稱為？",
+                options: ["權重（Weights）", "偏置（Bias）", "超參數（Hyperparameters）", "特徵值"],
+                correct: 2,
+                explanation: "超參數（如學習率、迭代次數）需要人工調整，而權重是模型訓練中自動學習的參數。"
+            },
+            {
+                category: "科目一",
+                question: "「梯度下降法（Gradient Descent）」在模型訓練中的作用是？",
+                options: ["增加模型複雜度", "尋找損失函數的最小值以優化權重", "產生合成數據", "數據特徵工程"],
+                correct: 1,
+                explanation: "梯度下降法是一種優化演算法，沿著梯度的反方向尋找最佳參數值。"
+            },
+            {
+                category: "科目一",
+                question: "損失函數（Loss Function）的主要用途是？",
+                options: ["用來計算模型的預測值與真實值之間的差距", "用來清除髒數據", "用來加速 GPU 運算", "用來生成圖像"],
+                correct: 0,
+                explanation: "損失函數提供了一個量化的指標，讓模型知道目前的表現有多差，以便優化。"
+            },
+            {
+                category: "科目一",
+                question: "大型語言模型（LLM）如 GPT 系列，主要基於哪種基礎架構？",
+                options: ["CNN", "RNN", "Transformer", "LSTM"],
+                correct: 2,
+                explanation: "Transformer 架構中的注意力機制（Attention）是目前 LLM 發展的基石。"
+            },
+            {
                 category: "",
                 question: "",
                 options: ["","","",""],
@@ -551,13 +663,12 @@
             userAnswers: [],
             sessionQuestions: [],
             manageCategory: categories[0],
-            isAnswered: false, // 是否已回答當前題目
-            selectedIdx: null  // 當前選擇的選項
+            isAnswered: false,
+            selectedIdx: null
         };
 
         window.onload = () => renderHome();
 
-        // 工具：計算剩餘天數
         function getDaysRemaining() {
             const now = new Date();
             const diffTime = EXAM_DATE - now;
@@ -575,38 +686,26 @@
         }
 
         // 更新頂部按鈕
-        function updateHeader(view){
+        function updateHeader(view) {
             const nav = document.getElementById('header-nav');
             const title = document.getElementById('main-title');
             
             if (view === 'quiz') {
-                title.innerText = "進行測驗中";
-                nav.innerHTML = `
-                    <button onclick="confirmExit()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition border border-white/20">
-                        退出
-                    </button>
-                `;
-            } else if(view === 'manage'){
-                title.innerText = "題庫管理中心";
-                nav.innerHTML = `
-                    <button onclick="renderHome()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition border border-white/20">
-                        返回首頁
-                    </button>
-                `;
+                title.innerText = "測驗進行中";
+                nav.innerHTML = `<button onclick="confirmExit()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg border border-white/20">退出</button>`;
+            } else if (view === 'manage') {
+                title.innerText = "題庫管理";
+                nav.innerHTML = `<button onclick="renderHome()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg border border-white/20">回首頁</button>`;
             } else {
                 title.innerText = "AI 應用規劃師測驗系統";
-                nav.innerHTML = `
-                    <button onclick="renderManage()" class="hidden text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition border border-white/20">
-                        管理題庫
-                    </button>
-                `;
+                nav.innerHTML = `<button onclick="renderManage()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg border border-white/20">管理題庫</button>`;
             }
         }
 
         function confirmExit() {
             const modal = document.getElementById('custom-modal');
             document.getElementById('modal-title').innerText = "退出測驗";
-            document.getElementById('modal-content').innerText = "確定要退出目前的測驗嗎？進度將不會被保存。";
+            document.getElementById('modal-content').innerText = "確定要中斷測驗嗎？目前的進度將會遺失。";
             const confirmBtn = document.getElementById('modal-confirm');
             confirmBtn.innerText = "確定退出";
             modal.classList.remove('hidden');
@@ -617,7 +716,7 @@
         }
 
     // --- 視圖：首頁 ---
-                function renderHome() {
+        function renderHome() {
             updateHeader('home');
             const container = document.getElementById('view-container');
             const daysLeft = getDaysRemaining();
