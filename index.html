@@ -33,8 +33,7 @@
             border-bottom: 3px solid #4f46e5;
             color: #4f46e5;
         }
-        /* 倒數計時動畫 */
-        .pulse-soft {
+        .pulse-soft {/* 倒數計時動畫 */
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
         @keyframes pulse {
@@ -82,6 +81,9 @@
 
         // 考試日期定義
         const EXAM_DATE = new Date('2026-03-21');
+        // 每次考20題
+        const MAX_QUESTIONS_PER_QUIZ = 20;
+
         
         // 題庫資料(增加 category 欄位)
         let questionBank = [
@@ -125,7 +127,7 @@
                 category: "科目一",
                 question: "某公司建置了基於檢索增強生成(RAG)的系統，其主要優勢為何?",
                 options: ["可以完全取代大型語言模型的推理能力。", "允許模型在回答時檢索外部數據源中的即時資訊，減少幻覺並提升準確度。", "可以大幅縮短模型的推論與回應時間。", "不需要任何外部資料庫即可運作。"],
-                correct: 2,
+                correct: 1,
                 explanation: "RAG 結合了檢索與生成，能補足模型知識的時效性與準確性。但因增加了檢索步驟，通常會比單純問 AI 稍微慢一些"
             },
             {
@@ -291,7 +293,7 @@
                 question: "關於AI的定義，下列敘述何者較為正確？",
                 options: ["AI僅限於深度學習技術","AI包括各種技術，例如機器學習、專家系統等","AI系統只能在學術研究中應用","AI無法應用於金融領域"],
                 correct: 1, //B
-                explanation: "人工智慧(AI)就像是一個龐大的拼圖，由許多不同的技術碎片組成。這些技術各司其職，共同構成了我們所理解的人工智慧。(A)不限於深度學習，還有機器學習、演算法等。(C)不只限制於特定的研究、金融領域，在各領域都有許多AI的應用，如：醫學、交通等。"
+                explanation: "人工智慧(AI)就像是一個龐大的拼圖，由許多不同的技術碎片組成。這些技術各司其職，共同構成了我們所理解的人工智慧。"
             },
             {
                 category: "科目一",
@@ -326,7 +328,7 @@
                 question: "生成式人工智慧最核心的能力是什麼？",
                 options: ["從大量數據中學習", "執行複雜的數學計算", "生成新的、原創的內容", "控制機器人"],
                 correct: 2, //C
-                explanation: "：生成式AI的最大特徵就是能夠生成全新的文本、圖像、音樂等內容。這與傳統的AI主要用於分析或預測已有數據不同。生成式 AI透過學習大量數據的模式，能產生出具有創造性的輸出。"
+                explanation: "生成式AI的最大特徵就是能夠生成全新的文本、圖像、音樂等內容。這與傳統的AI主要用於分析或預測已有數據不同。生成式 AI透過學習大量數據的模式，能產生出具有創造性的輸出。"
             },
             {
                 category: "科目一",
@@ -340,28 +342,28 @@
                 question: "關於AI，下列敘述何者較為正確？",
                 options: ["AI僅限於深度學習技術","AI包括各種技術，例如機器學習、專家系統等","AI系統只能在學術研究中應用","AI無法應用於金融領域"],
                 correct: 1, //B
-                explanation: "：AI是一個廣泛的領域，涵蓋了多種技術，包括但不限於機器學習、深度學習、專家系統、自然語言處理和計算機視覺等。它不僅限於深度學習，也不僅侷限於學術研究，且已成功應用於金融、醫療、製造等多個領域。"
+                explanation: "AI是一個廣泛的領域，涵蓋了多種技術，包括但不限於機器學習、深度學習、專家系統、自然語言處理和計算機視覺等。它不僅限於深度學習，也不僅侷限於學術研究，且已成功應用於金融、醫療、製造等多個領域。"
             },
             {
                 category: "科目一",
                 question: "在 AI治理中，下列何者是國際合作的重要性？",
                 options: ["統一AI發展標準","避免AI技術的濫用","促進AI技術的轉移","以上皆是"],
                 correct: 3, //D
-                explanation: "：在AI治理中，國際合作的重要性包含多個方面，主要包括：統一AI發展標準，確保不同國家在技術應用上的一致性和互操作性。避免AI技術的濫用，透過跨國監管和政策協調減少倫理與安全風險。促進AI技術的轉移，幫助各國共享技術資源，縮小數位鴻溝。因此，以上選項都屬於國際合作的重要性。"
+                explanation: "在AI治理中，國際合作的重要性包含多個方面，主要包括：統一AI發展標準，確保不同國家在技術應用上的一致性和互操作性。避免AI技術的濫用，透過跨國監管和政策協調減少倫理與安全風險。促進AI技術的轉移，幫助各國共享技術資源，縮小數位鴻溝。因此，以上選項都屬於國際合作的重要性。"
             },
             {
                 category: "科目一",
                 question: "關於K平均法(K-means)，下列敘述何者「不」正確？",
                 options: ["希望找出k個互不交集的群集","不同的起始群集中心，可能會造成不同的分群結果","容易受雜訊與離群值(Outlier)影響其群集中心","可以處理類別型資料"],
                 correct: 3,
-                explanation: "K-means 演算法特性為隨機選取集群中心、依距離計算、各群質心為代表點、分割式分群、易受離群值影響、類別型資料集群方法。"
+                explanation: "K-means 演算法特性為隨機選取集群中心、依距離計算、各群質心為代表點、分割式分群、易受離群值影響、類別型資料集群方法。以類別型資料為例：「台北」減去「台中」等於多少？「紅色」和「藍色」的平方差是多少？在數學上，類別之間沒有自然的「距離」或「方向」概念"
             },
             {
                 category: "科目一",
                 question: "在品質管理中，若一產品的生產過程中標準差顯著偏大，通常意味著什麼？",
                 options: ["資料點高度集中，產品質量穩定","生產過程波動大，產品品質不穩定","資料無法反映產品實際狀況 ","中位數數值高，品質良率較高"],
                 correct: 1,
-                explanation: "標準差越大表示數據分散程度越高，在品質管理中意味著產品或過程波動大，進而產品品質不穩定，故答案為B。"
+                explanation: "標準差越大表示數據分散程度越高，在品質管理中意味著產品或過程波動大，進而導致產品品質不穩定。"
             },
             // {
             //     category: "科目一",
@@ -382,12 +384,12 @@
                 question: "以下哪種情況下，使用中位數來描述資料的集中趨勢最為合適？",
                 options: ["一組考試成績，大部分學生分數集中在80分左右","一組房屋價格數據，其中包含少數豪宅的極端高價 ","一組產品銷售量數據，每個產品的銷量差異不大 ","一組學生身高數據，呈現出常態分布"],
                 correct: 1,
-                explanation: "平均數：易受極端值影響。當資料中有極端值時，平均數可能會偏離資料的中心趨勢。中位數：不受極端值影響。它能更準確地反映資料的中心趨勢，特別是在資料分布不對稱或有極端值的情況下。眾數：表示資料中出現頻率最高的數值。"
+                explanation: "平均數：易受極端值影響。當資料中有極端值時，平均數可能會偏離資料的中心趨勢。中位數：不受極端值影響。它能更準確地反映資料的中心趨勢，特別是在資料分布不對稱或有極端值的情況下。眾數：表示資料中出現頻率最高的數值。考試成績集中在 80 分左右： 資料分佈集中且對稱時，平均數與中位數會非常接近，通常使用「平均數」即可，因為它能納入所有學生的分數進行計算。銷售量差異不大： 當資料波動很小時，平均數能精確反映整體表現。學生身高呈現「常態分布」： 在常態分布（鐘形曲線）中，平均數、中位數和眾數三者會重合。此時通常優先選用「平均數」，因為它在數學統計上的應用更廣。"
             },
             {
                 category: "科目一",
                 question: "一組數據中，如果平均數小於中位數，那麼這組數據的分布可能是下列哪一種? ",
-                options: ["對稱分布","正偏態分布","負偏態分布",")無法判斷 "],
+                options: ["對稱分布","正偏態分布","負偏態分布","無法判斷 "],
                 correct: 2,
                 explanation: "對稱分布：平均數、中位數和眾數通常會接近。正偏態分布：資料的尾巴向右邊延伸，平均數會大於中位數。負偏態分布：資料的尾巴向左邊延伸，平均數會小於中位數。 "
             },
@@ -410,7 +412,7 @@
                 question: "下列哪一個敘述關於四分位距(IQR)是正確的？ ",
                 options: ["四分位距會受到極端值的影響","四分位距代表資料中所有數據的分散程度","四分位距是第三四分位數與第一四分位數的差 ","四分位距與平均數一樣，容易受到極端值影響"],
                 correct: 2,
-                explanation: "四分位距(IQR)是第三四分位數與第一四分位數的差，它代表資料中間50%數據的分散程度，不受極端值影響。"
+                explanation: "四分位距(IQR)是第三四分位數(Q3)與第一四分位數(Q1)的差，它代表資料中間50%數據的分散程度，一般用於偏態或不規則分佈，像是薪資、房價、考試成績等有極端高分時，結果較不受極端值影響。舉例：調查某公司的薪資。如果老闆的月薪是 200 萬，而員工多在 4-6 萬之間，老闆的薪水會拉高「平均值」和「標準差」，讓人誤以為員工薪水落差極大。此時用 IQR 就能更真實反映出一般員工的薪資分布範圍。"
             },
             {
                 category: "科目一",
@@ -431,7 +433,7 @@
                 question: "下列哪一項屬於監督式學習的特點？ ",
                 options: ["數據集中包含標記訊息","僅需探索數據內部的結構 ","使用代理與環境互動進行學習","不需要驗證集來調整參數"],
                 correct: 0,
-                explanation: "監督式學習依賴有標記的數據集，透過學習輸入與輸出之間的映射關係來進行預測或分類。(B)是非監督式學習的特點，(C)是強化學習的特點。"
+                explanation: "監督式學習依賴有標記的數據集，透過學習輸入與輸出之間的映射關係來進行預測或分類。不需要驗證集來調整參數是非監督式學習的特點；使用代理與環境互動進行學習是強化學習的特點。"
             },
             {
                 category: "科目一",
@@ -452,7 +454,7 @@
                 question: "機器學習的梯度下降演算法主要用於什麼？",
                 options: ["減少模型的計算複雜度","優化模型參數以最小化損失函數 ","減少數據中的雜訊干擾 ","增強數據特徵的表示能力"],
                 correct: 1,
-                explanation: "梯度下降演算法是一種優化方法，透過計算損失函數相對參數的偏導數，調整模型參數使損失函數值逐漸減小。"
+                explanation: "梯度下降演算法是一種優化方法，通常用於求解無約束最佳化問題的一階疊代最佳化算法，被用來求得可微函數的局部極小值，透過計算損失函數相對參數的偏導數，調整模型參數使損失函數值逐漸減小。"
             },
             {
                 category: "科目一",
@@ -491,7 +493,7 @@
             },
             {
                 category: "科目一",
-                question: "未命名的問題公司內部的經營數據分散在多個舊有系統，格式不一且難以管理，導致決策者無法取得一致的分析結果。問題：AI技術如何具體協助該公司改善資料管理困難？",
+                question: "某問題公司內部的經營數據分散在多個舊有系統，格式不一且難以管理，導致決策者無法取得一致的分析結果。問題：AI技術如何具體協助該公司改善資料管理困難？",
                 options: ["透過資料整合、數據清洗和視覺化","增加資料的複雜性以提升分析深度","減少資料的收集以簡化管理","將資料分散儲存在更多地方以分散風險"],
                 correct: 0,
                 explanation: "AI技術可以透過整合多個來源的資料、清洗不一致的數據並提供視覺化工具，幫助企業建立統一且易於理解的數據視圖。"
@@ -615,23 +617,21 @@
         }
 
     // --- 視圖：首頁 ---
-        function renderHome() {
+                function renderHome() {
             updateHeader('home');
             const container = document.getElementById('view-container');
             const daysLeft = getDaysRemaining();
 
             container.innerHTML = `
-                <div class="py-2 fade-in">
-                    <div class="mb-8 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl flex items-center justify-between shadow-sm pulse-soft">
+                <div class="fade-in space-y-8">
+                    <div class="p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl flex items-center justify-between shadow-sm pulse-soft">
                         <div class="flex items-center gap-3">
                             <div class="bg-amber-100 p-2 rounded-lg text-amber-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z" /></svg>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-amber-800">初級 AI 應用規劃師 考試倒數</p>
-                                <p class="text-xs text-amber-600 font-bold tracking-wide">考試日期：2026 / 03 / 21</p>
+                                <p class="text-xs text-amber-600 font-bold tracking-wide">2026 / 03 / 21</p>
                             </div>
                         </div>
                         <div class="text-right">
@@ -640,20 +640,20 @@
                         </div>
                     </div>
 
-                    <div class="text-center py-4">
-                        <h2 class="text-2xl font-black text-gray-800 mb-2">請選擇測驗科目</h2>
-                        <p class="text-gray-500 mb-8">每題作答後將即時提供答案回饋</p>
+                    <div class="text-center">
+                        <h2 class="text-2xl font-black text-gray-800 mb-2">開始模擬測驗</h2>
+                        <p class="text-gray-500 mb-6 text-sm">每次隨機抽選最多 <span class="text-indigo-600 font-bold">${MAX_QUESTIONS_PER_QUIZ}</span> 題並提供即時解析</p>
                         
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             ${categories.map(cat => {
                                 const count = questionBank.filter(q => q.category === cat).length;
                                 return `
-                                    <button onclick="startQuiz('${cat}')" class="group p-6 bg-white border-2 border-gray-100 rounded-2xl hover:border-indigo-500 hover:bg-indigo-50 transition-all text-left shadow-sm">
-                                        <div class="flex justify-between items-center mb-2">
+                                    <button onclick="startQuiz('${cat}')" class="p-6 bg-white border-2 border-gray-100 rounded-2xl hover:border-indigo-500 hover:bg-indigo-50 transition-all text-left group">
+                                        <div class="flex justify-between items-center mb-1">
                                             <span class="text-indigo-600 font-bold">${cat}</span>
-                                            <span class="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full">${count} 題</span>
+                                            <span class="text-[10px] bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full font-bold">庫存 ${count} 題</span>
                                         </div>
-                                        <p class="hidden text-sm text-gray-400">雙重隨機洗牌，附即時解析</p>
+                                        <p class="text-xs text-gray-400">點擊開始即時回饋測驗</p>
                                     </button>
                                 `;
                             }).join('')}
@@ -671,7 +671,7 @@
                 return;
             }
 
-            let shuffledPool = shuffleArray([...pool]);
+            let shuffledPool = shuffleArray([...pool]).slice(0, MAX_QUESTIONS_PER_QUIZ);
 
             state.sessionQuestions = shuffledPool.map(q => {
                 let meta = q.options.map((t, i) => ({ text: t, isCorrect: i === q.correct }));
