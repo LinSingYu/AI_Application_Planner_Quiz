@@ -622,7 +622,77 @@
                 question: "大型語言模型（LLM）如 GPT 系列，主要基於哪種基礎架構？",
                 options: ["CNN", "RNN", "Transformer", "LSTM"],
                 correct: 2,
+                "explanation": "鑑別式AI專注於學習數據的條件概率P（y|x），主要用於分類或迴歸任務，而非生成數據。"
+            },
+            {
+                "category": "科目一",
+                "question": "下列何者為鑑別式AI的主要目標？",
+                "options": ["學習數據的生成過程", "生成類似真實數據的新樣本", "分類或迴歸數據", "創建多樣化的數據分佈"],
+                "correct": 2,
                 explanation: "Transformer 架構中的注意力機制（Attention）是目前 LLM 發展的基石。"
+            },
+            {
+                "category": "科目一",
+                "question": "下列何者屬於生成式AI使用之模型？",
+                "options": ["支援向量機（SVM）", "邏輯迴歸（Logistic Regression）", "生成對抗網路（GAN）", "隨機森林（Random Forest）"],
+                "correct": 2,
+                "explanation": "生成對抗網路（GAN）是典型的生成式AI模型，專注於生成新數據，而其他選項均為鑑別式模型。"
+            },
+            {
+                "category": "科目一",
+                "question": "關於目前生成式AI的主要應用，不包括下列哪一項？",
+                "options": ["創建合成數據樣本", "模擬數據分佈", "分類醫學影像", "生成文本"],
+                "correct": 2,
+                "explanation": "生成式AI的核心應用包括生成合成數據、模擬分佈和生成文本，而分類醫學影像屬於鑑別式AI的應用範疇。"
+            },
+            {
+                "category": "科目一",
+                "question": "生成對抗網路（GAN）的兩個核心組件是什麼？",
+                "options": ["編碼器與解碼器", "分類器與生成器", "生成器與鑑別器", "訓練器與推斷器"],
+                "correct": 2,
+                "explanation": "GAN的兩個核心組件為生成器（Generator）和鑑別器（Discriminator），生成器負責生成數據，鑑別器負責判斷數據真假。"
+            },
+            {
+                "category": "科目一",
+                "question": "關於鑑別式AI，下列敘述何者較為正確？",
+                "options": ["學習數據的聯合概率P（x,y）", "專注於數據的分類或迴歸任務", "主要用於生成新數據", "適合處理無標記數據"],
+                "correct": 1,
+                "explanation": "鑑別式AI學習的是條件概率P（y∣x），用於分類或迴歸，並不適合生成數據或非監督式學習場景。"
+            },
+            {
+                "category": "科目一",
+                "question": "在醫學影像中，生成式AI和鑑別式AI的整合應用主要目的是什麼？",
+                "options": ["減少標記數據需求", "自動生成診斷結論", "提高診斷準確性和數據多樣性", "完全取代醫生的判斷"],
+                "correct": 2,
+                "explanation": "生成式AI用於生成多樣化數據，鑑別式AI提升診斷準確性，兩者結合可提高醫學影像分析的整體效能。"
+            },
+            {
+                "category": "科目一",
+                "question": "下列哪項是生成式AI支援鑑別式AI的典型案例？",
+                "options": ["模擬交通場景以訓練自動駕駛模型", "使用CNN對腫瘤分類", "使用SVM分析風險", "創建更好的分類演算法"],
+                "correct": 0,
+                "explanation": "生成式AI通常生成模擬場景數據，支援鑑別式AI進行模型訓練和決策。"
+            },
+            {
+                "category": "科目一",
+                "question": "下列哪種方法能解決生成式模型的訓練不穩定性問題？",
+                "options": ["使用更大的數據集", "採用Waserstein GAN（WGAN）", "提高硬體效能", "增加模型層數"],
+                "correct": 1,
+                "explanation": "Wasserstein GAN 透過改進損失函數提高了GAN模型的訓練穩定性，避免模式崩潰。"
+            },
+            {
+                "category": "科目一",
+                "question": "在整合應用中，生成式AI提供的數據增強主要解決了哪個問題？",
+                "options": ["模型過擬合", "數據稀缺或不平衡", "訓練過程的時間延遲", "數據隱私問題"],
+                "correct": 1,
+                "explanation": "生成式AI透過生成多樣化的數據樣本解決數據稀缺或不平衡問題，增強模型的泛化能力。。"
+            },
+            {
+                "category": "科目一",
+                "question": "未來整合鑑別式AI和生成式AI的關鍵方向是什麼？",
+                "options": ["增加生成模型的參數數量", "開發更高效的整合框架", "減少對標記數據的依賴", "將兩者獨立使用"],
+                "correct": 1,
+                "explanation": "整合框架的開發是未來的關鍵方向，旨在提升生成與分類模型的協同能力，實現更高效的應用。 "
             },
             {
                 category: "",
