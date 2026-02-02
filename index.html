@@ -695,6 +695,20 @@
                 explanation: "整合框架的開發是未來的關鍵方向，旨在提升生成與分類模型的協同能力，實現更高效的應用。 "
             },
             {
+                category: "科目一",
+                question: "在使用 NotebookLM 生成簡報並搭配 DeckEdit 進行優化時，下列關於這套工作流程的敘述何者「完全正確」？",
+                options: ["使用 DeckEdit 修改 NotebookLM 產出的簡報，主要能解決「重新生成」可能導致的字型崩壞或排版走樣問題。", "DeckEdit 透過 AI OCR 技術，讓原本不可編輯的 JPG/PDF 簡報檔變得能隨意挪動圖表位置並調整文字。", "DeckEdit 是一款付費訂閱制工具，但其強大之處在於能完美同步 NotebookLM 的動態排版更新。", "若在 DeckEdit 編輯模式中發現畫面像素較低且操作有延遲，應立即停止使用，以免導出的最終檔案模糊。"],
+                correct: 0,
+                explanation: "這是該工具的核心價值，透過直接在生成結果上修改文字，避免了因 AI 重新生成而產生的排版不可控風險。"
+            },
+            {
+                category: "科目一",
+                question: "Google Opal 的主要功能是什麼？",
+                options: ["面向人工智慧開發者的複雜程式設計環境。", "一款由人工智慧驅動的影片編輯軟體。", "無需編碼即可實現自動化的「人工智慧樂高」。", "谷歌推出的全新社群媒體平台。"],
+                correct: 2,
+                explanation: ""
+            },
+            {
                 category: "科目二",
                 question: "關於No Code與Low Code的基本概念，以下哪一項最為正確？",
                 options: [
@@ -1085,10 +1099,11 @@
             } else if (view === 'manage') {
                 title.innerText = "題庫管理";
                 nav.innerHTML = `<button onclick="renderHome()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg border border-white/20">回首頁</button>`;
-            } else {
-                title.innerText = "AI 應用規劃師測驗系統";
-                nav.innerHTML = `<button onclick="renderManage()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg border border-white/20">管理題庫</button>`;
-            }
+            } 
+            // else {
+            //     title.innerText = "AI 應用規劃師測驗系統";
+            //     nav.innerHTML = `<button onclick="renderManage()" class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg border border-white/20">管理題庫</button>`;
+            // }
         }
 
         function confirmExit() {
@@ -1298,7 +1313,7 @@
                         <p class="text-gray-600 leading-relaxed">
                             ${score === 100 ? '非常優秀！您已經完全掌握了此科目的核心知識點。' : 
                               score >= 60 ? '表現不錯！建議針對答錯的部分再進行加強。' : 
-                              '還需要多加努力，建議回到管理頁面重新檢閱題庫內容。'}
+                              '還需要多加努力！'}
                         </p>
                     </div>
 
