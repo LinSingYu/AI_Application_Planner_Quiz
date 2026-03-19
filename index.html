@@ -98,6 +98,80 @@
             quizLimit: 20 // 預設測驗題數
         };
         
+        // 隱藏題庫 (考前錯題練習)
+        const hiddenQuestionBank = [
+            {
+                category: "考前特訓",
+                question: "在深度學習模型訓練時，梯度下降法(Gradient Descent)常面臨卡在無法找出全域最小值的困境。下列何者為常見解決此現象的策略？",
+                options: ["大幅調降學習率","使用引入動量(Momentum)的優化器","增加神經網路深度","減少訓練集總量"],
+                correct: 1,
+                explanation: ""
+            },
+            {
+                category: "考前特訓",
+                question: "在執行大型語言模型的批次推論(Batch Inference)時，下列哪項通常不是該階段面臨的主要難題？",
+                options: ["如何優化GPU資源排程以提升利用率","如何確保訓練語料的標註品質與涵蓋性","如何有效分配資料流以避免資源壅塞","如何平衡批次規模以降低推論延遲與提升吞吐量"],
+                correct: 1,
+                explanation: "語料標註屬於模型訓練階段的課題，而非部署後的推論執行難題"
+            },
+            {
+                category: "考前特訓",
+                question: "某醫院計畫開發住院日數預測模型，以協助病房調度。多數病人的住院日數集中在3–7天，但仍有少數重症患者因治療需求而住院日數明顯偏長。醫院希望採用一種合適的評估方式，既能兼顧大部分病人的預測準確度，也能確保對重症個案的預測維持穩健。下列哪一種方法最符合此需求？",
+                options: ["在模型檢核時，同時呈現平均絕對誤差（MAE）與重症子群的誤差指標","僅針對一般病人樣本進行交叉驗證，以避免重症個案拉高誤差","將所有病人的住院日數進行標準化處理，以減少數值範圍差異的影響","只採用單一的整體決定係數 (R²) 作為模型優劣的判斷依據"],
+                correct: 0,
+                explanation: ""
+            },
+            // {
+            //     category: "考前特訓",
+            //     question: "哪種算法適合於非線性分類問題？",
+            //     options: ["","","",""],
+            //     correct: 0,
+            //     explanation: ""
+            // },
+            // {
+            //     category: "考前特訓",
+            //     question: "",
+            //     options: ["","","",""],
+            //     correct: 0,
+            //     explanation: ""
+            // },
+            // {
+            //     category: "考前特訓",
+            //     question: "",
+            //     options: ["","","",""],
+            //     correct: 0,
+            //     explanation: ""
+            // },
+            // {
+            //     category: "考前特訓",
+            //     question: "",
+            //     options: ["","","",""],
+            //     correct: 0,
+            //     explanation: ""
+            // },
+            // {
+            //     category: "考前特訓",
+            //     question: "",
+            //     options: ["","","",""],
+            //     correct: 0,
+            //     explanation: ""
+            // },
+            // {
+            //     category: "考前特訓",
+            //     question: "",
+            //     options: ["","","",""],
+            //     correct: 0,
+            //     explanation: ""
+            // },
+            // {
+            //     category: "考前特訓",
+            //     question: "",
+            //     options: ["","","",""],
+            //     correct: 0,
+            //     explanation: ""
+            // }
+        ];
+
         // 題庫資料(增加 category 欄位)
         let questionBank = [
             {
