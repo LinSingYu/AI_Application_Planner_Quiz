@@ -60,6 +60,13 @@
             <!-- 內容動態插入 -->
         </div>
 
+        <!-- 底部版權宣告與隱藏開關 -->
+        <div class="p-4 text-center bg-gray-50 border-t border-gray-100">
+            <span id="secret-trigger" onclick="handleSecretClick()" class="text-[10px] text-gray-300 cursor-pointer select-none hover:text-gray-400 transition-colors">
+                Copyright 2026 LIN
+            </span>
+        </div>
+
         <!-- 自訂對話框 (Modal) -->
         <div id="custom-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
             <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm overflow-hidden fade-in">
@@ -2449,7 +2456,257 @@
             },
         ];
 
+
+        // 隱藏題庫 (考前錯題練習)
+        const hiddenQuestionBank = [
+            {
+                category: "考前特訓",
+                question: "在深度學習模型訓練時，梯度下降法(Gradient Descent)常面臨卡在無法找出全域最小值的困境。下列何者為常見解決此現象的策略？",
+                options: ["大幅調降學習率","使用引入動量(Momentum)的優化器","增加神經網路深度","減少訓練集總量"],
+                correct: 1,
+                explanation: ""
+            },
+            {
+                category: "考前特訓",
+                question: "在執行大型語言模型的批次推論(Batch Inference)時，下列哪項通常不是該階段面臨的主要難題？",
+                options: ["如何優化GPU資源排程以提升利用率","如何確保訓練語料的標註品質與涵蓋性","如何有效分配資料流以避免資源壅塞","如何平衡批次規模以降低推論延遲與提升吞吐量"],
+                correct: 1,
+                explanation: "語料標註屬於模型訓練階段的課題，而非部署後的推論執行難題"
+            },
+            {
+                category: "考前特訓",
+                question: "某醫院計畫開發住院日數預測模型，以協助病房調度。多數病人的住院日數集中在3–7天，但仍有少數重症患者因治療需求而住院日數明顯偏長。醫院希望採用一種合適的評估方式，既能兼顧大部分病人的預測準確度，也能確保對重症個案的預測維持穩健。下列哪一種方法最符合此需求？",
+                options: ["在模型檢核時，同時呈現平均絕對誤差（MAE）與重症子群的誤差指標","僅針對一般病人樣本進行交叉驗證，以避免重症個案拉高誤差","將所有病人的住院日數進行標準化處理，以減少數值範圍差異的影響","只採用單一的整體決定係數 (R²) 作為模型優劣的判斷依據"],
+                correct: 0,
+                explanation: ""
+            },
+            {
+                category: "考前特訓",
+                question: "哪種算法適合於非線性分類問題？",
+                options: [
+                    "邏輯迴歸",
+                    "支援向量機（SVM）",
+                    "線性迴歸",
+                    "主成分分析（PCA）"
+                ],
+                correct: 1,
+                explanation: "SVM 可通過核函數處理非線性分類問題。"
+            },
+            {
+                category: "考前特訓",
+                question: "生成式 AI 學習的是哪種類型的概率分佈？",
+                options: [
+                    "條件概率 P(Y | X)",
+                    "聯合概率 P(X, Y) 或數據分佈 P(X)",
+                    "樣本空間的均值",
+                    "標籤分佈"
+                ],
+                correct: 1,
+                explanation: "生成式 AI 專注於學習數據的聯合概率分佈或數據本身的分布。"
+            },
+            {
+                category: "考前特訓",
+                question: "哪個框架主要用於生成式 AI 的研究與應用？",
+                options: [
+                    "TensorFlow 和 PyTorch",
+                    "SQL Server",
+                    "Excel",
+                    "Tableau"
+                ],
+                correct: 0,
+                explanation: "TensorFlow 和 PyTorch 是主流的深度學習框架，適合生成式 AI 的研究和實作。"
+            },
+            {
+                category: "考前特訓",
+                question: "在機器學習中，為防止過擬合，常用的方法是什麼？",
+                options: [
+                    "增加訓練數據量",
+                    "減少模型參數",
+                    "使用交叉驗證",
+                    "以上皆是"
+                ],
+                correct: 3,
+                explanation: "過擬合可以通過增加數據量、使用正規化、減少模型複雜度以及交叉驗證來解決。"
+            },
+            {
+                category: "考前特訓",
+                question: "在邏輯迴歸中，輸出的值通常被解釋為什麼？",
+                options: [
+                    "類別標籤",
+                    "條件概率",
+                    "數據的加權值",
+                    "數據標籤的和"
+                ],
+                correct: 1,
+                explanation: "邏輯迴歸的輸出是概率值，表示某個數據屬於某類的可能性。"
+            },
+            {
+                category: "考前特訓",
+                question: "GPT 模型屬於以下哪種類型的生成模型？",
+                options: [
+                    "變分自編碼器（VAE）",
+                    "自回歸模型",
+                    "擴散模型",
+                    "聚類模型"
+                ],
+                correct: 1,
+                explanation: "GPT 是一種自回歸模型，根據之前的輸入生成後續文本。"
+            },
+            {
+                category: "考前特訓",
+                question: "在資料分析中，「探索性數據分析（EDA）」的主要目的是什麼？",
+                options: [
+                    "預測未來數據",
+                    "測試數據集的大小",
+                    "發現數據中的模式和異常",
+                    "分析模型的參數"
+                ],
+                correct: 2,
+                explanation: "EDA 的目的是分析數據分佈、變量關係及潛在異常值。"
+            },
+            {
+                category: "考前特訓",
+                question: "根據人工智慧基本法草案，在中央政府層級中，哪一個機關被指定為人工智慧的主管機關？",
+                options: [
+                    "經濟部",
+                    "數位發展部",
+                    "國家發展委員會",
+                    "國家科技及技術委員會"
+                ],
+                correct: 3,
+                explanation: "數發部雖然參與高風險應用之認定，但根據草案內容，國家科技及技術委員會(國科會)被指定為人工智慧的主管機關，負責整體政策規劃與協調。"
+            },
+            {
+                category: "考前特訓",
+                question: "一家智慧工廠使用機器學習分類模型預測關鍵設備是否會異常停機。完成模型訓練後，團隊希望全面評估模型在不同面向的表現。請問下列哪項指標最適合用來衡量模型在偵測異常停機時的「漏報率」（即未能正確偵測出異常事件的比例）？",
+                options: [
+                    "準確率（Accuracy），即模型整體預測正確的比例",
+                    "召回率（Recall），即模型能正確找出異常停機的比例",
+                    "F1 分數（F1 Score），準確率與召回率的調和平均數",
+                    "假陽性率（False Positive Rate），即將正常事件誤判為異常的比例"
+                ],
+                correct: 1,
+                explanation: "召回率（Recall）衡量的是在所有實際為異常的樣本中，模型正確辨識出的比例。高召回率代表「漏報」的情況較少。"
+            },
+            {
+                category: "考前特訓",
+                question: "能使用DALL.E-2生成各式逼真的圖片，最關鍵的應用技術為何？",
+                options: [
+                    "卷積神經網路（CNN）",
+                    "生成對抗網路（GAN）",
+                    "擴散模型（Diffusion Models）",
+                    "自然語言處理（NLP）"
+                ],
+                correct: 2,
+                explanation: "DALL·E-2 使用擴散模型來生成逼真的圖片。"
+            },
+            {
+                category: "考前特訓",
+                question: "關於自然語言處理(NLP)核心技術，下列敘述何者不正確？",
+                options: [
+                    "語音識別技術將語音轉換為文本，並用於語音助理和語音輸入",
+                    "自然語言生成技術可以生成自然流暢的文本，應用於聊天機器人和內容創作",
+                    "語意分析技術理解文本的語意，並主要用於語音識別和機器翻譯",
+                    "機器翻譯技術自動翻譯文本，促進多語言支援和全球溝通"
+                ],
+                correct: 2,
+                explanation: "語意分析技術主要用於理解文本的語意，並主要用於語音識別和機器翻譯。"
+            },
+            {
+                category: "考前特訓",
+                question: "下列何者為鑑別式AI的主要目標？",
+                options: ["學習數據的生成過程", "生成類似真實數據的新樣本", "分類或迴歸數據", "創建多樣化的數據分佈"],
+                correct: 2,
+                explanation: "Transformer 架構中的注意力機制(Attention)是目前 LLM 發展的基石。"
+            },
+                        {
+                category: "考前特訓",
+                question: "一家跨國醫療研究機構希望利用各地醫院的病患資料，建立一個能夠預測疾病早期風險的機器學習模型。由於各國法規限制，病患的原始資料無法集中到單一伺服器。在此情境下，下列哪一種方法最能同時滿足「各醫院保留資料不外流」與「模型仍能跨院學習」的需求？",
+                options: ["聯邦學習（Federated Learning）","資料匿名化（Data Anonymization）","差分隱私（Differential Privacy）","交叉驗證（Cross-validation）"],
+                correct: 0,
+                explanation: ""
+            },
+            // {
+            //     category: "考前特訓",
+            //     question: "",
+            //     options: [
+            //         "",
+            //         "",
+            //         "",
+            //         ""
+            //     ],
+            //     correct: ,
+            //     explanation: ""
+            // },
+            // {
+            //     category: "考前特訓",
+            //     question: "",
+            //     options: [
+            //         "",
+            //         "",
+            //         "",
+            //         ""
+            //     ],
+            //     correct: ,
+            //     explanation: ""
+            // },
+            // {
+            //     category: "考前特訓",
+            //     question: "",
+            //     options: [
+            //         "",
+            //         "",
+            //         "",
+            //         ""
+            //     ],
+            //     correct: ,
+            //     explanation: ""
+            // },
+
+
+        ];
+
         window.onload = () => renderHome();
+
+        // 隱藏題庫觸發邏輯
+        function handleSecretClick() {
+            const now = Date.now();
+            if (now - state.lastClickTime > 1000) {
+                state.clickCount = 0;
+            }
+            state.clickCount++;
+            state.lastClickTime = now;
+
+            if (state.clickCount === 3) {
+                state.clickCount = 0;
+                startHiddenQuiz();
+            }
+        }
+
+        function startHiddenQuiz() {
+            // 直接進入隱藏題庫測驗
+            let shuffledPool = shuffleArray([...hiddenQuestionBank]);
+            
+            state.sessionQuestions = shuffledPool.map(q => {
+                let meta = q.options.map((t, i) => ({ text: t, isCorrect: i === q.correct }));
+                shuffleArray(meta);
+                return {
+                    category: q.category,
+                    question: q.question,
+                    options: meta.map(m => m.text),
+                    correct: meta.findIndex(m => m.isCorrect),
+                    explanation: q.explanation
+                };
+            });
+
+            state.currentIndex = 0;
+            state.score = 0;
+            state.userAnswers = [];
+            state.isAnswered = false;
+            state.selectedIdx = null;
+            updateHeader('quiz');
+            renderQuestion();
+        }
 
         function getDaysRemaining() {
             const now = new Date();
@@ -2688,7 +2945,7 @@
                     <div class="bg-gray-50 p-6 rounded-3xl border border-gray-100 text-left">
                         <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2"><span class="w-1 h-5 bg-indigo-600 rounded-full"></span>測驗結果回饋</h3>
                         <p class="text-sm text-gray-600 leading-relaxed">
-                            ${score === 100 ? '完美達成！您的準備非常充分，請保持這個狀態迎接考試。' : score >= 60 ? '可以啦！另外一科考高一點就會過了。' : '仍有進步空間。建議針對該科目的重點解析進行加強複習。'}
+                            ${score === 100 ? '完美達成！您的準備非常充分，請保持這個狀態迎接考試。' : score >= 60 ? '表現優良！建議回頭檢視紅色的題目，理解解析中的核心概念。' : '仍有進步空間。建議針對該科目的重點解析進行加強複習。'}
                         </p>
                     </div>
 
@@ -2707,89 +2964,55 @@
                 <div class="fade-in space-y-6">
                     <div class="flex border-b border-gray-200">
                         ${categories.map(cat => `
-                            <button onclick="switchManageTab('${cat}')" class="flex-1 py-3 font-bold transition-all ${state.manageCategory === cat ? 'tab-active' : 'text-gray-400 hover:text-gray-600'}">
-                                ${cat}
-                            </button>
+                            <button onclick="switchManageTab('${cat}')" class="flex-1 py-3 text-sm font-bold transition-all ${state.manageCategory === cat ? 'tab-active' : 'text-gray-400'}">${cat}</button>
                         `).join('')}
                     </div>
 
                     <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200 space-y-4">
-                        <h3 class="font-bold text-gray-700">新增題目到「${state.manageCategory}」</h3>
-                        <input id="new-q-text" type="text" placeholder="題目內容" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 border-gray-300">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <input id="opt-0" type="text" placeholder="選項 A" class="p-2 border rounded-lg border-gray-300">
-                            <input id="opt-1" type="text" placeholder="選項 B" class="p-2 border rounded-lg border-gray-300">
-                            <input id="opt-2" type="text" placeholder="選項 C" class="p-2 border rounded-lg border-gray-300">
-                            <input id="opt-3" type="text" placeholder="選項 D" class="p-2 border rounded-lg border-gray-300">
+                        <h3 class="font-bold text-gray-700 text-sm">新增至「${state.manageCategory}」</h3>
+                        <input id="new-q-text" type="text" placeholder="題目內容" class="w-full p-3 border rounded-xl outline-none focus:ring-1 focus:ring-indigo-500 border-gray-300 text-sm transition">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <input id="opt-0" type="text" placeholder="選項 A" class="p-2 border rounded-lg border-gray-300 transition">
+                            <input id="opt-1" type="text" placeholder="選項 B" class="p-2 border rounded-lg border-gray-300 transition">
+                            <input id="opt-2" type="text" placeholder="選項 C" class="p-2 border rounded-lg border-gray-300 transition">
+                            <input id="opt-3" type="text" placeholder="選項 D" class="p-2 border rounded-lg border-gray-300 transition">
                         </div>
-                        <div class="flex flex-wrap items-center gap-4">
-                            <select id="correct-idx" class="p-2 border rounded-lg border-gray-300 text-sm">
-                                <option value="0">正確答案：A</option>
-                                <option value="1">正確答案：B</option>
-                                <option value="2">正確答案：C</option>
-                                <option value="3">正確答案：D</option>
+                        <div class="flex items-center gap-3">
+                            <select id="correct-idx" class="p-2 border rounded-lg border-gray-300 text-xs bg-white outline-none">
+                                <option value="0">正確 A</option><option value="1">正確 B</option><option value="2">正確 C</option><option value="3">正確 D</option>
                             </select>
-                            <button onclick="addQuestion()" class="flex-1 bg-green-600 text-white py-2 rounded-xl font-bold hover:bg-green-700 transition shadow-md">加入題庫</button>
+                            <button onclick="addQuestion()" class="flex-1 bg-green-600 text-white py-2 rounded-xl font-bold hover:bg-green-700 transition text-sm shadow-md">加入題庫</button>
                         </div>
-                        <textarea id="new-q-exp" placeholder="請輸入本題詳細解析內容..." class="w-full p-3 border rounded-lg border-gray-300 text-sm h-24 outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                        <textarea id="new-q-exp" placeholder="請填寫詳細解析內容..." class="w-full p-3 border rounded-lg border-gray-300 text-xs h-16 outline-none focus:ring-1 focus:ring-indigo-500 transition"></textarea>
                     </div>
 
-                    <div class="space-y-3">
-                        <h3 class="font-bold text-gray-700 px-1">現有題目 (${filteredQuestions.length})</h3>
-                        <div class="max-h-[250px] overflow-y-auto space-y-2 pr-2">
-                            ${filteredQuestions.length === 0 ? '<p class="text-center text-gray-400 py-8 italic">此科目尚無題目</p>' : 
+                    <div class="space-y-2">
+                        <h3 class="font-bold text-gray-700 text-xs px-1">現有題目列表 (${filteredQuestions.length})</h3>
+                        <div class="max-h-[200px] overflow-y-auto space-y-2 pr-1">
+                            ${filteredQuestions.length === 0 ? '<p class="text-center text-gray-400 py-6 text-xs italic">目前此科目無題目</p>' : 
                                 filteredQuestions.map((q, idx) => {
                                     const originalIdx = questionBank.findIndex(item => item === q);
                                     return `
-                                        <div class="bg-white p-4 border border-gray-100 rounded-xl flex justify-between items-start hover:shadow-sm transition">
-                                            <div class="flex-1 pr-4 text-sm">
-                                                <p class="font-bold text-gray-800 leading-relaxed">${idx + 1}. ${q.question}</p>
-                                                <p class="text-indigo-500 mt-2 font-medium">正確答案：${q.options[q.correct]}</p>
-                                            </div>
-                                            <button onclick="deleteQuestion(${originalIdx})" class="text-gray-300 hover:text-red-500 transition p-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    `;
-                                }).join('')
-                            }
+                                        <div class="bg-white p-3 border border-gray-100 rounded-xl flex justify-between items-start text-xs hover:shadow-sm transition">
+                                            <div class="flex-1 pr-2"><p class="font-bold text-gray-800 leading-relaxed">${idx + 1}. ${q.question}</p></div>
+                                            <button onclick="deleteQuestion(${originalIdx})" class="text-gray-300 hover:text-red-500 p-1 transition"><svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>
+                                        </div>`;
+                                }).join('')}
                         </div>
                     </div>
                 </div>
             `;
         }
 
-        function switchManageTab(cat){
-            state.manageCategory = cat;
-            renderManage();
-        }
+        function switchManageTab(cat) { state.manageCategory = cat; renderManage(); }
 
         function addQuestion() {
             const q = document.getElementById('new-q-text').value.trim();
             const exp = document.getElementById('new-q-exp').value.trim();
-            const opts = [
-                document.getElementById('opt-0').value.trim(),
-                document.getElementById('opt-1').value.trim(),
-                document.getElementById('opt-2').value.trim(),
-                document.getElementById('opt-3').value.trim()
-            ];
+            const opts = [document.getElementById('opt-0').value.trim(), document.getElementById('opt-1').value.trim(), document.getElementById('opt-2').value.trim(), document.getElementById('opt-3').value.trim()];
             const correct = parseInt(document.getElementById('correct-idx').value);
-
-            if (!q || opts.some(o => !o)) {
-                alert('請填寫完整題目與四個選項內容');
-                return;
-            }
-
-            questionBank.push({
-                category: state.manageCategory,
-                question: q,
-                options: opts,
-                correct: correct,
-                explanation: exp || "無詳細解析。"
-            });
-
+            if (!q || opts.some(o => !o)) return alert('請填寫完整題目內容與四個選項。');
+            questionBank.push({ category: state.manageCategory, question: q, options: opts, correct: correct, explanation: exp || "無詳細解析。" });
             renderManage();
         }
 
