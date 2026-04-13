@@ -2573,6 +2573,136 @@
   {
     "level": "初級",
     "category": "科目二",
+    "question": "在評估 AI 專案的導入成本時，除了初始購買成本外，還包含後續維運、訓練與電力等隱性成本，這通常被稱為：",
+    "options": [
+      "ROI (投資報酬率)",
+      "TCO (總體擁有成本)",
+      "Token Economics (代幣經濟)",
+      "Margin Cost (邊際成本)"
+    ],
+    "correct": 1,
+    "explanation": "TCO (Total Cost of Ownership) 包含資產生命週期內的所有成本。ROI 則是指投資帶來的收益比率。"
+  },
+  {
+    "level": "初級",
+    "category": "科目二",
+    "question": "關於檢索增強生成 (RAG) 的敘述，下列何者「錯誤」？",
+    "options": [
+      "能有效減少大型語言模型的幻覺 (Hallucination) 問題",
+      "透過向量資料庫檢索外部知識來輔助生成內容",
+      "主要透過重新訓練模型權重來更新知識",
+      "適合處理具時效性或企業私有數據的查詢"
+    ],
+    "correct": 2,
+    "explanation": "RAG 是透過「外掛知識庫」的方式提供上下文，而非透過「重新訓練（微調）」模型權重來更新知識。"
+  },
+  {
+    "level": "初級",
+    "category": "科目二",
+    "question": "若企業想針對特定領域（如醫學、法律）微調大型模型，但硬體資源有限，最適合採用下列哪種參數高效微調 (PEFT) 技術？",
+    "options": [
+      "Full Fine-tuning (全參數微調)",
+      "LoRA (低秩適配器)",
+      "Knowledge Distillation (知識蒸餾)",
+      "Homomorphic Encryption (同態加密)"
+    ],
+    "correct": 1,
+    "explanation": "LoRA (Low-Rank Adaptation) 僅微調少量的額外參數，大幅降低了顯存需求與運算成本。"
+  },
+  {
+    "level": "初級",
+    "category": "科目二",
+    "question": "在處理敏感數據（如醫療或金融資料）時，哪種技術可以實現在「加密狀態下進行運算」，而無需事先解密？",
+    "options": [
+      "Symmetric Encryption (對稱加密)",
+      "Homomorphic Encryption (同態加密)",
+      "RAG (檢索增強生成)",
+      "C2PA (內容來源與真實性聯盟協定)"
+    ],
+    "correct": 1,
+    "explanation": "同態加密 (Homomorphic Encryption) 允許直接對密文進行運算，結果解密後與對明文運算的結果一致，保障隱私。"
+  },
+  {
+    "level": "初級",
+    "category": "科目二",
+    "question": "關於 C2PA 標準的應用，主要目的為何？",
+    "options": [
+      "提高生成影像的分辨率",
+      "驗證數位內容的來源與真實性（如判定是否為 AI 生成）",
+      "加速模型的推論速度",
+      "壓縮影片檔案大小"
+    ],
+    "correct": 1,
+    "explanation": "C2PA 是一項技術標準，透過在檔案中嵌入元數據（Metadata），追蹤內容的來源與修改歷史，對抗深偽 (Deepfake)。"
+  },
+  {
+    "level": "初級",
+    "category": "科目二",
+    "question": "在 Transformer 架構中，關於 Encoder（編碼器）與 Decoder（解碼器）的差異，何者正確？",
+    "options": [
+      "Encoder 擅長理解上下文（如 BERT），Decoder 擅長預測下一個字（如 GPT）",
+      "Decoder 無法使用 Attention 機制",
+      "Encoder 主要用於影像生成，Decoder 用於語音辨識",
+      "兩者功能完全相同，僅名稱不同"
+    ],
+    "correct": 0,
+    "explanation": "Encoder 負責將輸入轉為特徵向量（理解），Decoder 負責根據特徵自迴歸生成輸出（預測）。"
+  },
+  {
+    "level": "初級",
+    "category": "科目二",
+    "question": "若要解決「語音轉文字 (STT) 系統無法正確辨識特定專業術語」的問題，最優先的優化順序應為？",
+    "options": [
+      "1. 增加熱詞表 (Hotwords) / 2. 微調聲學模型 / 3. 更新語言模型",
+      "1. 更換硬體麥克風 / 2. 增加音量 / 3. 重新錄音",
+      "1. 忽略錯誤 / 2. 手工修正 / 3. 重新訓練全模型",
+      "1. 增加資料增強 / 2. 使用同態加密 / 3. 使用 RAG"
+    ],
+    "correct": 0,
+    "explanation": "針對專業術語，最快的方法是提供熱詞表（詞典對映），其次是透過特定領域資料微調模型。"
+  },
+  {
+    "level": "初級",
+    "category": "科目二",
+    "question": "關於「提示工程 (Prompt Engineering)」中的 Few-shot Prompting，是指：",
+    "options": [
+      "不給任何範例，直接要求模型回答",
+      "提供少量範例給模型，引導其遵循特定輸出格式或邏輯",
+      "要求模型一步步思考 (Chain of Thought)",
+      "限制模型回答的字數"
+    ],
+    "correct": 1,
+    "explanation": "Few-shot 是指在提示詞中加入少數幾個「輸入-輸出」範例，讓模型模仿。"
+  },
+  {
+    "level": "初級",
+    "category": "科目二",
+    "question": "下列哪種情境最適合使用「No-code / Low-code」AI 工具？",
+    "options": [
+      "開發全新底層神經網路架構",
+      "企業內部非技術人員需快速部署簡單的分類流程",
+      "需要對模型進行極致的硬體推論優化",
+      "研究最前沿的論文演算法實現"
+    ],
+    "correct": 1,
+    "explanation": "No-code/Low-code 旨在降低技術門檻，讓非工程人員能透過視覺化介面使用 AI 功能。"
+  },
+  {
+    "level": "初級",
+    "category": "科目二",
+    "question": "關於知識蒸餾 (Knowledge Distillation) 的目的，下列敘述何者正確？",
+    "options": [
+      "讓小模型（學生）學習大模型（老師）的知識，以達成模型壓縮與加速",
+      "將加密的數據解密還原成原始數據",
+      "將文字轉換成圖片的技術",
+      "清理資料集中的異常值"
+    ],
+    "correct": 0,
+    "explanation": "知識蒸餾是將龐大模型的預測邏輯遷移到輕量化模型中，適合行動端或邊緣運算部署。"
+  },
+  {
+    "level": "初級",
+    "category": "科目二",
     "question": "在 Agent-to-Agent (A2A) 架構中，不同代理人之間會分工合作。一般而言，下列敘述何者最符合 Client Agent 與 Remote Agent 的互動流程？",
     "options": [
       "Remote Agent 主動分派任務給 Client Agent",
