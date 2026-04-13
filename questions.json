@@ -2261,6 +2261,162 @@
   {
     "level": "初級",
     "category": "科目一",
+    "question": "在可解釋 AI (XAI) 中，關於「反事實解釋 (Counterfactual Explanations)」的敘述，下列何者正確？",
+    "options": [
+      "說明「如果某些輸入特徵發生特定變化，預測結果將會改變」的最小擾動",
+      "透過視覺化特徵的重要性來解釋模型",
+      "僅適用於線性模型的一種全局解釋方法",
+      "用於處理資料集中類別不平衡的問題"
+    ],
+    "correct": 0,
+    "explanation": "反事實解釋的核心在於「如果...就不會...」，它尋找一個與原始輸入最接近的範例，但使其預測結果發生翻轉，從而幫助使用者理解決策邊界。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "關於 SHAP (SHapley Additive exPlanations) 解釋方法的敘述，下列何者正確？",
+    "options": [
+      "是一種基於賽局理論分配貢獻度的方法",
+      "僅能提供全局解釋，無法解釋單一樣本",
+      "主要用於解決過擬合問題",
+      "是一種隨機抽樣的降維技術"
+    ],
+    "correct": 0,
+    "explanation": "SHAP 基於賽局理論中的 Shapley value，將特徵對模型預測的貢獻度進行公平分配，能兼顧局部與全局解釋。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "在評估分類模型時，如果我們非常在意「模型漏掉真實正樣本（如：癌症篩檢）」的風險，應該優先參考哪一項指標？",
+    "options": [
+      "準確率 (Accuracy)",
+      "精確率 (Precision)",
+      "召回率 (Recall)",
+      "F1 分數 (F1-Score)"
+    ],
+    "correct": 2,
+    "explanation": "召回率 (Recall) 衡量的是在所有真實為正的樣本中，被模型正確預測出來的比例。在醫療或煙霧偵測等「漏報代價大」的場景中尤為重要。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "當模型在訓練集表現優異，但在測試集表現極差時，這種現象通常被稱為？",
+    "options": [
+      "欠擬合 (Underfitting)",
+      "過擬合 (Overfitting)",
+      "資料偏誤 (Data Bias)",
+      "梯度爆炸 (Gradient Explosion)"
+    ],
+    "correct": 1,
+    "explanation": "過擬合是指模型過度學習訓練數據中的噪聲，導致泛化能力下降，在未見過的數據上表現不佳。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "關於處理資料類別不平衡的 SMOTE 技術，下列敘述何者正確？",
+    "options": [
+      "直接複製少數類別的樣本",
+      "刪除多數類別的樣本以達成平衡",
+      "透過在特徵空間中對相鄰樣本進行插值，生成新的合成樣本",
+      "將所有樣本權重設為相同"
+    ],
+    "correct": 2,
+    "explanation": "SMOTE (Synthetic Minority Over-sampling Technique) 是一種過取樣技術，它不是單純複製，而是在少數類別樣本的近鄰間生成合成樣本。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "大數據 (Big Data) 的「4V」特徵中，哪一個是指數據的「多樣性」，包含結構化與非結構化數據？",
+    "options": [
+      "Volume (大量)",
+      "Velocity (高速)",
+      "Variety (多樣)",
+      "Veracity (真實)"
+    ],
+    "correct": 2,
+    "explanation": "Variety 代表數據來源與類型的多樣性，如文字、影像、聲音等。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "在大型語言模型 (LLM) 的訓練中，RLHF 是指什麼？",
+    "options": [
+      "基於規則的硬性過濾方法",
+      "來自人類回饋的強化學習",
+      "低秩適配微調技術",
+      "分散式硬體加速框架"
+    ],
+    "correct": 1,
+    "explanation": "RLHF (Reinforcement Learning from Human Feedback) 透過人類對模型輸出的排序或評分來微調模型，使其更符合人類的意圖與價值觀。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "在電腦視覺中，為了幫助人類理解模型關注影像的哪些區域，最適合使用下列哪種工具？",
+    "options": [
+      "Saliency Map (顯著圖)",
+      "Confusion Matrix (混淆矩陣)",
+      "Hyperparameter Tuning (超參數調整)",
+      "Linear Regression (線性迴歸)"
+    ],
+    "correct": 0,
+    "explanation": "Saliency Map 透過計算輸出對輸入特徵的梯度，可視化出影像中哪些像素對分類結果貢獻最大。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "關於 LSTM (長短期記憶神經網路) 的描述，何者正確？",
+    "options": [
+      "是一種專門處理靜態影像的捲積神經網路",
+      "透過門控機制 (Gates) 解決長序列中的梯度消失問題",
+      "計算效率比 Transformer 中的 Attention 機制更高",
+      "僅能處理固定長度的數值向量"
+    ],
+    "correct": 1,
+    "explanation": "LSTM 是 RNN 的變體，設計了遺忘門、輸入門與輸出門，能有效捕捉長距離依賴關係。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "有一個排序好的數值陣列（矩陣），若要尋找特定標值（如 27），使用「二分搜尋法 (Binary Search)」，在最差的情況下最多需要幾次比對？",
+    "options": [
+      "與陣列長度相同次數",
+      "log2(N) 次",
+      "固定 27 次",
+      "N/2 次"
+    ],
+    "correct": 1,
+    "explanation": "二分搜尋法每次將搜尋範圍減半，其時間複雜度為 O(log2 N)。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "為了防止「資料洩漏 (Data Leakage)」並確保模型評估的公平性，關於「標準化 (Normalization)」的操作，下列何者正確？",
+    "options": [
+      "使用全部數據（含測試集）的平均值來進行標準化",
+      "僅使用訓練集的統計量（平均值、標準差）來對訓練集與測試集進行標準化",
+      "測試集不需要進行標準化",
+      "訓練集與測試集分別使用各自的統計量獨立進行標準化"
+    ],
+    "correct": 1,
+    "explanation": "標準化參數（如均值）應僅從訓練集獲取。若使用了測試集的資訊，則屬於資料洩漏，會導致模型評估結果過於樂觀。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "某成衣工廠希望利用 AI 「生成」全新的服裝款式，而非單純分類，這最可能屬於哪種 AI 應用？",
+    "options": [
+      "判別式模型 (Discriminative Model)",
+      "生成式 AI (Generative AI)",
+      "強化學習 (Reinforcement Learning)",
+      "監督式學習的迴歸分析"
+    ],
+    "correct": 1,
+    "explanation": "生成式 AI（如 GANs 或 Diffusion models）可用於創造新的影像、樣式或設計。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
     "question": "某電商公司想預測用戶是否會購買特定商品，資料中包含多種用戶屬性與行為特徵。分析師希望選出對購買結果最有預測價值的特徵，以提升模型效能。下列哪一種描述最符合監督式特徵選擇（Supervised Feature Selection）的概念？",
     "options": [
       "根據特徵的整體分布、變異度或資訊量進行篩選，而不直接參考目標變數",
@@ -4232,19 +4388,43 @@
     "explanation": "在VGG16架構中，大部分參數集中在最後的全連接層（Fully Connected / Linear layers），因為其輸入展平後維度極高，導致權重數量非常龐大。相較之下，卷積層雖然計算量大，但參數共享使其參數數量相對較少；ReLU與池化層則幾乎不包含可學習參數。因此全連接層的參數量最多。"
   },
   {
-      "level": "中級",
-      "category": "科目三",
-      "question": "在神經網路中，了解各層的運算量分佈，有助於模型壓縮與硬體加速的策略設計。請問在VGG16中，下列何者運算量(FLOPs)最多？",
-      "options": ["卷積層(Conv2d)", "全連接層(Linear)", "ReLU激活函數", "池化層(MaxPool2d, AdaptiveAvgPool2d)"],
-      "correct": 0,
-      "explanation": "在VGG16中，運算量（FLOPs）主要集中在卷積層，因為卷積運算需要在整個特徵圖上進行大量的滑動視窗計算，涉及大量乘加運算。雖然全連接層參數數量最多，但其運算量相對於卷積層仍較小；ReLU與池化層的計算則更為簡單。因此卷積層的FLOPs最多。"
+    "level": "中級",
+    "category": "科目三",
+    "question": "在神經網路中，了解各層的運算量分佈，有助於模型壓縮與硬體加速的策略設計。請問在VGG16中，下列何者運算量(FLOPs)最多？",
+    "options": ["卷積層(Conv2d)", "全連接層(Linear)", "ReLU激活函數", "池化層(MaxPool2d, AdaptiveAvgPool2d)"],
+    "correct": 0,
+    "explanation": "在VGG16中，運算量（FLOPs）主要集中在卷積層，因為卷積運算需要在整個特徵圖上進行大量的滑動視窗計算，涉及大量乘加運算。雖然全連接層參數數量最多，但其運算量相對於卷積層仍較小；ReLU與池化層的計算則更為簡單。因此卷積層的FLOPs最多。"
   },
   {
-      "level": "中級",
-      "category": "科目三",
-      "question": "VGG16層數深且結構規則，由多層卷積、池化及全連接層組成。了解各層的輸入/輸出維度、參數量及記憶體需求，有助於掌握CNN模型的組成邏輯與實作技巧。根據VGG16的模型架構，下列敘述何者正確？",
-      "options": ["AdaptiveAvgPool2d的輸出會被攤平後傳入第一個全連接層；由於前一層池化輸出空間為 4×4，所以第一個線性層的輸入維度是 512×4×4 = 8192", "Linear-33（第一個全連接層）報出的102,764,544參數只包含權重，偏差（bias）沒有算在內", "根據列出的「Estimated Total Size (MB) = 624.98」，表示訓練此模型只需大約625MB的GPU記憶體（包含所有optimizer state與梯度），所以一張 1 GB的GPU就足夠訓練", "VGG16包含13層卷積層（conv）與3層全連接層（FC），總參數數目約為 138,357,544（約138.36M）"],
-      "correct": 3,
-      "explanation": "VGG16的標準架構確實包含13層卷積層與3層全連接層，總參數量約為138M，這是經典且廣為接受的事實。其他選項中，A錯在輸出尺寸通常為7×7而非4×4；B錯在參數數量通常包含權重與偏差；C錯在估算記憶體未包含訓練時的梯度與optimizer狀態，實際需求遠大於625MB。"
+    "level": "中級",
+    "category": "科目三",
+    "question": "VGG16層數深且結構規則，由多層卷積、池化及全連接層組成。了解各層的輸入/輸出維度、參數量及記憶體需求，有助於掌握CNN模型的組成邏輯與實作技巧。根據VGG16的模型架構，下列敘述何者正確？",
+    "options": ["AdaptiveAvgPool2d的輸出會被攤平後傳入第一個全連接層；由於前一層池化輸出空間為 4×4，所以第一個線性層的輸入維度是 512×4×4 = 8192", "Linear-33（第一個全連接層）報出的102,764,544參數只包含權重，偏差（bias）沒有算在內", "根據列出的「Estimated Total Size (MB) = 624.98」，表示訓練此模型只需大約625MB的GPU記憶體（包含所有optimizer state與梯度），所以一張 1 GB的GPU就足夠訓練", "VGG16包含13層卷積層（conv）與3層全連接層（FC），總參數數目約為 138,357,544（約138.36M）"],
+    "correct": 3,
+    "explanation": "VGG16的標準架構確實包含13層卷積層與3層全連接層，總參數量約為138M，這是經典且廣為接受的事實。其他選項中，A錯在輸出尺寸通常為7×7而非4×4；B錯在參數數量通常包含權重與偏差；C錯在估算記憶體未包含訓練時的梯度與optimizer狀態，實際需求遠大於625MB。"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "老闆擬透過機器學習的方式，利用過往的產品銷售資料，預測下一季的產品銷售數量，以調整現有的庫存水位。下列哪一個類型的模型，比較適合應用在老闆期望的預測目標？",
+    "options": ["決策樹分類器", "K-means 分群（K-means Clustering）", "主成份分析（Principal Component Analysis, PCA）", "線性迴歸（Linear Regression）"],
+    "correct": 3,
+    "explanation": "此情境下，老闆希望預測的是連續數值（銷售數量），因此應選擇回歸模型。決策樹分類器用於分類問題，K-means分群是無監督學習方法，主成份分析用於降維，而線性迴歸則適用於連續變量的預測。"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "在 MapReduce 計算框架中，關於 Map 和 Reduce 所負責處理資料的問題，下列敘述何者正確？",
+    "options": ["Map：一組資料映射成另一組資料；Reduce：統合與歸納資料", "Map：地圖式的搜索資料；Reduce：統合與歸納資料", "Map：一組資料映射成另一組資料；Reduce：過濾不符合的資料", "Map：一組資料映射成另一組資料；Reduce：生成更多的資料"],
+    "correct": 0,
+    "explanation": "在 MapReduce 框架中，Map 階段負責將輸入資料轉換成鍵值對，而 Reduce 階段則負責對 Map 階段的輸出進行統合與歸納。其他選項的描述不符合 MapReduce 的基本概念。"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "下列何種卷積神經網路（Convolution Neural Networks, CNN）是將卷積層加寬而非加深？",
+    "options": ["VGG16", "ResNet50", "DenseNet121", "Inception"],
+    "correct": 3,
+    "explanation": "InceptionV3 是一種將卷積層加寬而非加深的卷積神經網路架構。它透過在同一層中使用多種不同大小的卷積核來捕捉不同尺度的特徵，從而增加了模型的寬度。相比之下，VGG16、ResNet50 和 DenseNet121 都是通過增加層數（加深）來提升模型表達能力的架構。"
   }
 ]
