@@ -4217,7 +4217,7 @@
     "level": "中級",
     "category": "科目三",
     "question": "某零售企業建立一個銷售預測模型，希望評估該模型在不同月份的新資料上，是否仍能維持穩定的預測表現。資料科學團隊計畫利用統計方法檢驗模型對未觀察資料的適應能力與泛化效果。下列哪一種方法最適合用於此目的？ ",
-    "options": ["交叉驗證（Cross-Validation）；","卡方檢定（Chi-square Test） ","配對樣本t檢定（Paired-sample t-test）","F檢定（F-test）；"],
+    "options": ["交叉驗證（Cross-Validation）","卡方檢定（Chi-square Test） ","配對樣本t檢定（Paired-sample t-test）","F檢定（F-test）"],
     "correct": 0,
     "explanation": ""
   },
@@ -4225,7 +4225,7 @@
     "level": "中級",
     "category": "科目三",
     "question": "在建立迴歸或分類模型時，若希望避免模型過度擬合（Overfitting），可透過加入正則化項以限制模型的複雜度。其中，L1正則化（Lasso）的主要效果為何？",
-    "options": ["產生稀疏模型（Sparse Model），使部分參數權重收斂為零","增加模型參數的數量，以提升表現靈活度；","強化梯度穩定性，避免參數更新過度震盪","提高學習率（Learning Rate），加速模型收斂速度 "],
+    "options": ["產生稀疏模型（Sparse Model），使部分參數權重收斂為零","增加模型參數的數量，以提升表現靈活度","強化梯度穩定性，避免參數更新過度震盪","提高學習率（Learning Rate），加速模型收斂速度 "],
     "correct": 0,
     "explanation": ""
   },
@@ -4305,7 +4305,7 @@
     "level": "中級",
     "category": "科目三",
     "question": "某智慧製造公司開發一套設備故障預測系統，利用感測器資料訓練深度神經網路（Deep Neural Network, DNN）模型，以提前偵測異常運作跡象。在訓練過程中，團隊發現模型收斂速度不穩定：有時過快導致過擬合，有時又遲遲無法達到最佳準確率。開發團隊可以藉由調整下列哪一項超參數（Hyperparameter）以改善此問題？ ",
-    "options": ["學習率（Learning Rate），控制模型權重更新的速度","每個神經元的輸出結果","損失函數（Loss Function）在訓練過程中的梯度變化值（Gradient）；","模型在訓練後產生的權重值"],
+    "options": ["學習率（Learning Rate），控制模型權重更新的速度","每個神經元的輸出結果","損失函數（Loss Function）在訓練過程中的梯度變化值（Gradient）","模型在訓練後產生的權重值"],
     "correct": 0,
     "explanation": ""
   },
@@ -4345,7 +4345,7 @@
     "level": "中級",
     "category": "科目三",
     "question": "下列哪一種優化演算法內建動量（Momentum）的設計機制？ ",
-    "options": ["Adam；","RMSProp；","Adagrad","SGD+Momentum"],
+    "options": ["Adam","RMSProp","Adagrad","SGD+Momentum"],
     "correct": 0,
     "explanation": ""
   },
@@ -4556,5 +4556,117 @@
     "options": ["VGG16", "ResNet50", "DenseNet121", "Inception"],
     "correct": 3,
     "explanation": "InceptionV3 是一種將卷積層加寬而非加深的卷積神經網路架構。它透過在同一層中使用多種不同大小的卷積核來捕捉不同尺度的特徵，從而增加了模型的寬度。相比之下，VGG16、ResNet50 和 DenseNet121 都是通過增加層數（加深）來提升模型表達能力的架構。"
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"下列何者不屬於資料整合（Data Integration）的主要目的？",
+    "options":["依資料保存政策延長原始資料留存期限，以利未來可能的分析需求", "整併多來源資料，以提升資料完整性與應用價值", "識別並處理重複資料，避免影響模型訓練結果", "統一不同來源資料的格式與欄位定義，以確保分析一致性"],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"某智慧城市專案導入AI技術，以優化垃圾收集路線調度並即時監測空氣品質變化。系統需持續蒐集環境數據（如 PM2.5、氣體濃度）與設備狀態（如垃圾桶滿溢度）。下列何種技術最直接支援上述需求？",
+    "options":["感知器網路（Sensor Network）", "啟發式決策引擎（Heuristic Decision Engine）", "決策支援系統（Decision Support System）", "專家系統（Expert System）"],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"下列何者不符合非監督式學習（Unsupervised Learning）的典型特徵？ ",
+    "options":["模型主要學習輸入特徵與既定目標標記之間的對應關係", "常用於探索資料的潛在結構或隱含模式", "訓練過程中不需仰賴事先定義的標籤資料； ", "模型可依據資料中的特徵相似性進行自動分群； "],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"某保險公司建立AI理賠金額預測模型。歷史理賠資料經檢定後呈近似常態分佈，但仍存在少數極端高額案件。資料科學團隊在不破壞整體分佈特性的前提下，規劃進行離群值處理。下列何者最不適當？",
+    "options":["結合領域知識評估其合理性，再決定保留或修正", "使用One-hot 編碼（One-hot Encoding）將離群值轉換為類別特徵以改善數值穩定性", "採用截尾（Trimming）處理極端值，以提升模型穩定性", "依統計準則（如Z-score或IQR）評估後，再決定是否調整或處理極端值"],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"某銀行建立AI詐欺交易偵測模型。歷史交易資料中，詐欺樣本比例極低，導致模型訓練時偏向預測為「正常交易」。資料科學團隊評估採用SMOTE（Synthetic Minority Over-sampling Technique）改善訓練資料分佈。下列何者最符合SMOTE技術的主要功能？",
+    "options":["依據少數類別樣本的特徵空間，合成產生新的少數類別樣本", "以交叉驗證（Cross-validation）方式重新分割資料集，使各折資料類別比例一致", "調整模型的損失函數（Loss Function）權重，使誤判少數類別時的懲罰提高", "透過隨機刪除部分正常交易資料，以降低類別失衡程度"],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"資料科學團隊在模型訓練前，需對數值特徵進行正規化（Normalization）或標準化（Standardization）。為確保模型評估結果具真實性並避免資料洩漏（Data Leakage），下列何者為最適當的作法？",
+    "options":["先分割訓練資料（Training Data）和測試資料（Test Data），僅以訓練資料計算統計量，再套用至測試資料", "僅對訓練資料（Training Data）進行標準化處理，測試資料（Test Data）保持原始數值", "先分割訓練資料（Training  Data）和測試資料（Test Data），並各自獨立計算統計量後進行標準化", "於資料分割前，先對完整資料集計算統計量並進行標準化處理"],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"某電信公司建立機器學習模型預測用戶流失風險。資料中包含多個類別型特徵（Categorical Features），例如「資費方案類型」與「客戶地區」。為使模型能有效使用這些特徵，下列何者最直接用於將類別型特徵轉換為模型可處理的數值格式？ ",
+    "options":["One-hot 編碼（One-hot Encoding）", "寬深模型（Wide and Deep）", "特徵交叉（Feature Cross）", "資料分群（Data Clustering）"],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"某零售企業在建置機器學習模型預測顧客購買機率時， 資料同時包含大量稀疏類別特徵與數值型特徵。 團隊希望模型既能學習過去已出現的特徵組合規律，也能對未出現的特徵組合做出合理預測。 下列哪一種模型架構最適合此類需求？ ",
+    "options":["寬深模型（Wide and Deep）", "支援向量機（Support Vector Machine, SVM）", "決策樹（Decision Tree）", "線性迴歸（Linear Regression）； "],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"某影音串流平台建立神經網路模型，用於預測使用者最可能感興趣的影片類型。模型輸出層需將結果轉換為各類別的機率分佈，以便系統依機率高低推薦內容。下列哪一種函數最適合用於模型輸出層？",
+    "options":["Softmax函數（Softmax Function）", "線性函數（Linear Function）", "Sigmoid函數（Sigmoid Function）", "ReLU函數（Rectified Linear Unit Function）"],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"某設計公司導入生成式AI（Generative AI）工具，用於自動產生產品概念圖與風格草圖。為了讓系統能依據既有圖像資料產生具有變化且風格一致的新圖像，模型必須具備學習資料特性並生成新樣本的能力。下列哪一種模型技術或方法最符合上述需求？ ",
+    "options":["隱變量自編碼器（Variational Autoencoder, VAE）", "隨機森林（Random Forest）", "K-近鄰演算法（K-Nearest Neighbors, KNN）； ", "貝氏網路（Bayesian Network）"],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"某企業導入生成式AI（Generative AI）系統自動產出會議摘要，並規劃額外建置一套AI系統，用於評估摘要內容的正確性與完整性。下列何者為此AI系統的核心目標？ ",
+    "options":["判斷摘要是否遺漏關鍵資訊或出現語意錯誤", "自動標註摘要的關鍵字與主題標籤", "調整語音轉文字結果", "自動新增專業名詞與技術指標"],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"ChatGPT、Gemini等對話型生成式AI工具所依據的基礎模型技術，下列何者正確？",
+    "options":["大型語言模型（Large Language Model, LLM）", "圖卷積網路（Graph Convolutional Network, GCN）", "生成對抗網路（Generative Adversarial Network, GAN）", "決策樹（Decision Tree）"],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"根據《金融機構運用人工智慧技術作業規範》，金融機構於使用人工智慧提供金融服務並直接與消費者互動時，下列何者非必要揭露之資訊？ ",
+    "options":["該服務之 AI 模型原始程式碼", "該服務是否提供替代方案", "該服務是否為 AI 自動完成", ")服務適用對象與用途範圍"],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"初級",
+    "category":"科目一",
+    "question":"下列哪一項「AI技術應用與產業領域」的對應最為恰當？",
+    "options":["使用AI進行設備故障預測與預防性維護—智慧製造", "利用 AI 分析社群媒體互動以提升臨床診斷準確度—金融服務業", "以 AI 模型融合即時氣象資料與乘客消費行為特徵，推薦會員升級優惠方案—智慧醫療", "利用AI分析商場顧客購買紀錄以預測股票市場波動—智慧交通"],
+    "correct":0,
+    "explanation":""
   }
 ]
