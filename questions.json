@@ -6590,7 +6590,7 @@
   {
     "level": "中級",
     "category": "科目三",
-    "question": "某工廠生產線有一台影像瑕疵檢測 AI 設備。已知產品實際不良率為 2%。AI 設備對不良品的檢出率（真陽性率）為 95%，對良品的誤報率（偽陽性率）為 5%。若該設備判定某產品「有瑕疵」，則該產品「確實是不良品」的機率大約為何？",
+    "question": "某工廠生產線有一台影像瑕疵檢測 AI 設備。已知產品實際不良率為 2%。AI 設備對不良品的檢出率(真陽性率)為 95%，對良品的誤報率(偽陽性率)為 5%。若該設備判定某產品「有瑕疵」，則該產品「確實是不良品」的機率大約為何？",
     "options": [
       "95%",
       "28%",
@@ -6598,17 +6598,17 @@
       "50%"
     ],
     "correct": 1,
-    "explanation": "用貝氏定理來計算真實的「事後機率」：P(不良|判瑕疵) = [P(判瑕疵|不良) * P(不良)] / P(判瑕疵的總機率)。\n1. 分子（產品真的壞且被抓到）：0.02 (不良率) * 0.95 (檢出率) = 0.019\n2. 分母（所有警報響起的總機率）：包含真的抓到 (0.019) 加上 誤報良品 (0.98 * 0.05 = 0.049)，總和為 0.019 + 0.049 = 0.068。\n3. 計算事後機率：0.019 / 0.068 ≈ 0.2794 (約 28%)。"
+    "explanation": "用貝氏定理來計算真實的「事後機率」：P(不良|判瑕疵) = [P(判瑕疵|不良) * P(不良)] / P(判瑕疵的總機率)。\n1. 分子(產品真的壞且被抓到)：0.02 (不良率) * 0.95 (檢出率) = 0.019\n2. 分母(所有警報響起的總機率)：包含真的抓到 (0.019) 加上 誤報良品 (0.98 * 0.05 = 0.049)，總和為 0.019 + 0.049 = 0.068。\n3. 計算事後機率：0.019 / 0.068 ≈ 0.2794 (約 28%)。"
   },
   {
     "level": "中級",
     "category": "科目三",
-    "question": "在二元分類模型的評估中，ROC 曲線（Receiver Operating Characteristic curve）是非常重要的工具。請問 ROC 曲線的 X 軸與 Y 軸分別代表什麼統計指標？",
+    "question": "在二元分類模型的評估中，ROC 曲線(Receiver Operating Characteristic curve)是非常重要的工具。請問 ROC 曲線的 X 軸與 Y 軸分別代表什麼統計指標？",
     "options": [
-      "X 軸：精確率（Precision）；Y 軸：召回率（Recall）",
-      "X 軸：偽陽性率（FPR）；Y 軸：真陽性率（TPR）",
-      "X 軸：真陽性率（TPR）；Y 軸：偽陽性率（FPR）",
-      "X 軸：閾值（Threshold）；Y 軸：準確率（Accuracy）"
+      "X 軸：精確率(Precision)；Y 軸：召回率(Recall)",
+      "X 軸：偽陽性率(FPR)；Y 軸：真陽性率(TPR)",
+      "X 軸：真陽性率(TPR)；Y 軸：偽陽性率(FPR)",
+      "X 軸：閾值(Threshold)；Y 軸：準確率(Accuracy)"
     ],
     "correct": 1,
     "explanation": ""
@@ -6616,14 +6616,170 @@
   {
     "level": "中級",
     "category": "科目三",
-    "question": "在自然語言處理的文本特徵工程中，TF-IDF 是一種經典的統計權重計算方法。關於 IDF（逆向檔案頻率）的設計哲學，下列敘述何者正確？",
+    "question": "在自然語言處理的文本特徵工程中，TF-IDF 是一種經典的統計權重計算方法。關於 IDF(逆向檔案頻率)的設計哲學，下列敘述何者正確？",
     "options": [
       "一個詞彙在當前文章中出現的次數越多，其 IDF 值越高",
       "一個詞彙如果在越多的文章中出現過，其 IDF 值會越低",
-      "IDF 主要用來衡量詞彙在文章中情感極性（正負面）的強度",
+      "IDF 主要用來衡量詞彙在文章中情感極性(正負面)的強度",
       "長度越長的文章，所有詞彙的 IDF 值都會自動增加"
     ],
     "correct": 1,
-    "explanation": "出現在太多文章的詞（如停用詞）缺乏鑑別力，IDF 給予極低權重。"
+    "explanation": "出現在太多文章的詞(如停用詞)缺乏鑑別力，IDF 給予極低權重。"
+  },
+  {
+    "level": "初級",
+    "category": "科目一",
+    "question": "在進行AI建模前，進行「資料標註」的主要目的是？ ",
+    "options": [
+      "減少資料容量",
+      "強化系統安全性",
+      "讓模型能夠辨識輸入與目標之間的對應關係",
+      "提升資料儲存速度"
+    ],
+    "correct": 2,
+    "explanation": "資料標註是為未經標註的資料人工添加標籤或標記的過程，主要目的是讓機器學習模型能夠學習輸入(Features)與目標(Labels)之間的對應關係，以便進行預測或分類。"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "條件機率 P(A|B) 的定義是什麼？",
+    "options": [
+      "P(A) / P(B)",
+      "P(A ∩ B) / P(B)",
+      "P(A) * P(B)",
+      "P(A ∪ B) / P(B)"
+    ],
+    "correct": 1,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "條件機率 P(A|B) 的定義是什麼？",
+    "options": [
+      "事件 A 發生的機率",
+      "事件 B 發生的機率",
+      "在事件 B 已經發生的條件下，事件 A 發生的機率",
+      "事件 A 和事件 B 同時發生的機率"
+    ],
+    "correct": 2,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "在機器學習中，常用來描述連續型隨機變數(例如，身高、體重、溫度)的機率分佈是？",
+    "options": [
+      "二項分佈",
+      "常態分佈(高斯分佈)",
+      "卜瓦松分佈",
+      "指數分佈"
+    ],
+    "correct": 1,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "在假設檢定(Hypothesis Testing)中，P值(P-value)代表什麼意義？",
+    "options": [
+      "虛無假設(Null Hypothesis, H0)為真的機率",
+      "在虛無假設為真的前提下，觀察到當前樣本結果或更極端結果的機率",
+      "對立假設(Alternative Hypothesis, H1)為真的機率",
+      "犯第一型錯誤(Type I Error)的機率上限，即顯著水準(Significance Level, α)"
+    ],
+    "correct": 1,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "貝氏定理(Bayes' Theorem)描述了在獲得新的證據(觀察數據)後，如何更新對一個假設的信任程度(機率)。其數學表達式 P(H|E) = [P(E|H) * P(H)] / P(E) 中，P(H) 代表什麼？",
+    "options": [
+      "後驗機率(Posterior Probability)：觀察到證據E後，假設H為真的機率",
+      "概似度(Likelihood)：假設H為真時，觀察到證據E的機率",
+      "先驗機率(Prior Probability)：在觀察到任何證據之前，假設H為真的初始機率(主觀信任度)",
+      "證據的邊際機率(Marginal Probability of Evidence)：觀察到證據E的總機率"
+    ],
+    "correct": 1,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "最大概似估計(Maximum Likelihood Estimation, MLE)是一種常用的參數估計方法。其基本思想是？",
+    "options": [
+      "選擇使先驗機率最大化的參數值",
+      "選擇使觀測到的數據樣本出現的機率(概似度)最大化的參數值",
+      "選擇使後驗機率最大化的參數值(這是最大後驗估計 MAP)",
+      "選擇使模型預測誤差最小化的參數值(這更接近損失函數最小化)"
+    ],
+    "correct": 1,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "在資訊理論中，熵(Entropy)衡量的是一個隨機變數的什麼特性？",
+    "options": [
+      "平均值(Mean)",
+      "不確定性或資訊量",
+      "變異數(Variance)",
+      "相關係數(Correlation Coefficient)"
+    ],
+    "correct": 1,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "在評估二元分類模型的性能時，混淆矩陣(Confusion Matrix)中，Recall的計算公式？",
+    "options": [
+      "TP / (TP + FP)",
+      "TP / (TP + FN)",
+      "TN / (TN + FP)",
+      "TN / (TN + FN)"
+    ],
+    "correct": 1,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "樸素貝氏分類器(Naive Bayes Classifier)的核心假設是什麼？",
+    "options": [
+      "所有特徵之間是線性相關的",
+      "給定類別標籤的條件下，所有特徵之間是條件獨立的(Conditional Independence)",
+      "所有特徵都服從常態分佈",
+      "類別標籤的先驗機率必須相等"
+    ],
+    "correct": 1,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "在統計推斷中，信賴區間(Confidence Interval)提供的是什麼資訊？",
+    "options": [
+      "母體參數（Population Parameter）的確切值。",
+      "一個涵蓋母體參數機率（如95%）的參數估計範圍。",
+      "單次實驗結果的機率。",
+      "樣本平均數與母體平均數之差的絕對值。"
+    ],
+    "correct": 1,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "KL 散度（Kullback-Leibler Divergence），也稱為相對熵（Relative Entropy），主要用來衡量什麼？",
+    "options": [
+      "兩個隨機變數之間的線性相關程度",
+      "兩個機率分佈之間的差異或距離（但它不是真正的距離度量，因為不對稱）",
+      "單一機率分佈的不確定性",
+      "一個變數包含關於另一個變數的資訊量（互訊息 Mutual Information）"
+    ],
+    "correct": 1,
+    "explanation": ""
   }
 ]
