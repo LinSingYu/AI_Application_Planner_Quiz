@@ -2451,7 +2451,7 @@
       "檢視產品價格與月銷售量之間的關聯性，以評估是否具線性相關"
     ],
     "correct": 0,
-    "explanation": "直方圖(Histogram)是統計學中觀察連續型變數次數分布最常用的工具，能直觀呈現數據的集中趨勢、偏態(Skewness)與峰度。其他選項較適合的圖表為：(B)(C) 折線圖、(D) 散佈圖。"
+    "explanation": "直方圖(Histogram)是統計學中觀察連續型變數次數分布最常用的工具，能直觀呈現數據的集中趨勢、偏態(Skewness)與峰度。"
   },
   {
     "level": "初級",
@@ -2750,7 +2750,7 @@
       "對底層運算資源的控制力較弱，難以進行深度的效能優化。"
     ],
     "correct": 2,
-    "explanation": "No Code / Low Code 工具的主要限制包括靈活性較低、廠商鎖定風險、以及對底層資源的控制力較弱。開發速度通常比傳統撰寫程式碼更快，因此(C) 不屬於主要限制。"
+    "explanation": "No Code / Low Code 工具的主要限制包括靈活性較低、廠商鎖定風險、以及對底層資源的控制力較弱。開發速度通常比傳統撰寫程式碼更快。"
   },
   {
     "level": "初級",
@@ -4609,7 +4609,7 @@
       "公司已有完整的MLOps平台與資深資料科學團隊，模型更新採固定流程"
     ],
     "correct": 0,
-    "explanation": ""
+    "explanation": "AutoML(自動化機器學習)的核心價值在於自動化處理特徵選擇、模型選擇與超參數調優，極適合用於需要快速產出結果，或缺乏專業資料科學人才但有建模需求的情境。"
   },
   {
     "level": "中級",
@@ -6468,7 +6468,7 @@
       "Accuracy(準確度)：直接計算預測正確的樣本佔總樣本的比例"
     ],
     "correct": 1,
-    "explanation": "Macro-averaging 會給予每個類別相同的權重(Weight)，不論該類別在數據集中出現的頻率高低。在醫療情境下，雖然重症僅佔 1%，但其重要性不亞於 90% 的健康類別，因此使用 Macro-F1 能確保模型對「少數類別」的辨識能力被充分反映出來。相較之下，Micro-averaging 或 Accuracy 都會被多數類別(健康)的表現所主導。"
+    "explanation": "Macro-averaging 會給予每個類別相同的權重(Weight)，因此稀有類別(如本題中僅佔 1% 的重症)與多數類別(健康)對最終分數的貢獻是一樣的。加權平均則會依比例調整，仍會讓大類別影響較深。"
   },
   {
     "level": "中級",
@@ -6546,7 +6546,7 @@
       "p 值無法告訴我們虛無假設為真的機率，它僅反映觀測數據與虛無假設之間的相容程度"
     ],
     "correct": 2,
-    "explanation": "選項 (C) 錯誤。p 值僅代表「統計上的顯著性」，意即結果是否不太可能是由隨機波動造成的，它並不反映「進步幅度的大小」。一個極微小的效應(例如點擊率只提升了 0.001%)，只要樣本量(Sample Size)足夠大，也能得到極小的 p 值。因此在實務中，必須同時參考 p 值與實際的效應值(Effect Size)。"
+    "explanation": "p 值僅代表「統計上的顯著性」，意即結果是否不太可能是由隨機波動造成的，它並不反映「進步幅度的大小」。一個極微小的效應(例如點擊率只提升了 0.001%)，只要樣本量(Sample Size)足夠大，也能得到極小的 p 值。因此在實務中，必須同時參考 p 值與實際的效應值(Effect Size)。"
   },
   {
     "level": "中級",
@@ -6761,8 +6761,8 @@
     "category": "科目三",
     "question": "在統計推斷中，信賴區間(Confidence Interval)提供的是什麼資訊？",
     "options": [
-      "母體參數（Population Parameter）的確切值。",
-      "一個涵蓋母體參數機率（如95%）的參數估計範圍。",
+      "母體參數(Population Parameter)的確切值。",
+      "一個涵蓋母體參數機率(如95%)的參數估計範圍。",
       "單次實驗結果的機率。",
       "樣本平均數與母體平均數之差的絕對值。"
     ],
@@ -6772,14 +6772,274 @@
   {
     "level": "中級",
     "category": "科目三",
-    "question": "KL 散度（Kullback-Leibler Divergence），也稱為相對熵（Relative Entropy），主要用來衡量什麼？",
+    "question": "KL 散度(Kullback-Leibler Divergence)，也稱為相對熵(Relative Entropy)，主要用來衡量什麼？",
     "options": [
       "兩個隨機變數之間的線性相關程度",
-      "兩個機率分佈之間的差異或距離（但它不是真正的距離度量，因為不對稱）",
+      "兩個機率分佈之間的差異或距離(但它不是真正的距離度量，因為不對稱)",
       "單一機率分佈的不確定性",
-      "一個變數包含關於另一個變數的資訊量（互訊息 Mutual Information）"
+      "一個變數包含關於另一個變數的資訊量(互訊息 Mutual Information)"
     ],
     "correct": 1,
     "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "可解釋性(Explainability)在以下哪種情況下特別重要？",
+    "options": [
+      "當模型是神經網路時",
+      "當模型是線性回歸時",
+      "當模型是決策樹時",
+      "當模型是簡單的統計模型時"
+    ],
+    "correct": 0,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "可解釋性(Interpretability)與以下哪一點有關?",
+    "options": [
+      "模型的輸入和輸出之間的直接關係",
+      "使用外部技術來闡明模型的行為",
+      "模型的複雜性和不可理解性",
+      "提供模型決策的後期解釋"
+    ],
+    "correct": 0,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "模型多樣性如何提高預測準確性?",
+    "options": [
+      "通過創建不同錯誤的模型集成",
+      "通過減少模型的參數數量",
+      "通過簡化推理過程",
+      "通過增加訓練數據的冗餘"
+    ],
+    "correct": 0,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "推理多樣性在預測階段的作用是甚麼?",
+    "options": [
+      "生成多個潛在結果或選擇",
+      "增加訓練數據的冗餘",
+      "簡化決策過程",
+      "減少模型的參數數量"
+    ],
+    "correct": 0,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "某些演算法天生更容易偏見是因為甚麼原因?",
+    "options": [
+      "演算法的數學基礎",
+      "訓練資料中的缺陷",
+      "資料集的大小",
+      "模型的運行時間"
+    ],
+    "correct": 0,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "以下哪一項不是用來量化模型公平性的指標?",
+    "options": [
+      "偏見偵測指數",
+      "人口平等差異",
+      "平等機會",
+      "不同影響"
+    ],
+    "correct": 0,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "下列哪一項公平性指標強調模型在不同群體之間的真陽性率和假陽性率應該相等？",
+    "options": [
+      "平等化機會",
+      "人口平等",
+      "平等機會",
+      "個體公平性"
+    ],
+    "correct": 0,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "某 AI 團隊開發了一個深度卷積神經網路(CNN)用於識別影像中的車輛種類。主管希望在不修改模型架構的前提下，直觀地以「熱力圖(Heatmap)」形式視覺化呈現模型在分類時所關注的影像區域。下列哪一種可解釋 AI(XAI)技術最符合「模型特定(Model-specific)」且專為卷積層特徵圖設計的特性？",
+    "options": [
+      "LIME (Local Interpretable Model-agnostic Explanations)",
+      "SHAP (SHapley Additive exPlanations)",
+      "Grad-CAM (Gradient-weighted Class Activation Mapping)",
+      "Permutation Importance"
+    ],
+    "correct": 0,
+    "explanation": "關鍵字在於「熱力圖」、「CNN 卷積層特徵圖」以及「模型特定(Model-specific)」，此為 Grad-CAM 的核心定義。"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "關於 Grad-CAM 技術的運作原理，下列敘述何者正確？",
+    "options": [
+      "它必須在 CNN 模型訓練的過程中同時加入注意力機制(Attention Mechanism)才能運作",
+      "它主要利用輸入層影像的像素特徵，建立一個局部的線性代理模型來進行解釋",
+      "它利用目標類別的預測分數相對於「最後一個卷積層」特徵圖的梯度(Gradient)來計算特徵權重",
+      "它是透過隨機屏蔽(Masking)輸入影像的局部區塊，觀察模型預測分數的下降幅度來排序重要性"
+    ],
+    "correct": 2,
+    "explanation": "Grad-CAM 的核心就在於利用目標類別對「最後一層卷積層」的梯度回傳來加權特徵圖(Feature Maps)"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "某醫療科技公司訓練了一個 AI 胸部 X 光影像模型用來診斷肺炎。在測試階段，模型的準確率高達 95%，但實務導入醫院後效果卻大幅衰退。AI 應用規劃師使用 Grad-CAM 進行局部解釋時，發現熱力圖(Heatmap)的高亮區域大量集中在影像右上角的「醫院標籤字樣(如：Hospital A)」而非肺部組織。面對此現象，下列哪一項分析與後續處置最適當？",
+    "options": [
+      "說明模型已經成功學會利用醫院環境特徵進行精準推理，無需修改資料集",
+      "此現象顯示模型產生了「捷徑學習(Shortcut Learning)」與偏見，應重新檢視並清洗訓練資料，移除或遮蔽與疾病無關的標籤資訊",
+      "這代表 Grad-CAM 工具運作異常，應改用 SHAP 重新計算全域的特徵分配",
+      "應直接調高模型的學習率(Learning Rate)並增加卷積層數量，以強化肺部特徵的提取"
+    ],
+    "correct": 0,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "在可解釋 AI(Explainable AI, XAI) 的分類架構中，LIME(Local Interpretable Model-agnostic Explanations)屬於哪一類解釋技術？",
+    "options": [
+      "內建可解釋模型(Intrinsic Interpretability)",
+      "對話式解釋系統(Conversational AI Explainer)",
+      "後處理模型解釋(Post-hoc Explanation)",
+      "知識蒸餾技術(Knowledge Distillation)"
+    ],
+    "correct": 0,
+    "explanation": ""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question":"人資部門想根據員工的年資、學歷、技能數量、績效分數，預測合理的年薪數字，作為調薪參考。 身為AI應用規劃師，你想要用哪一種AI模型來解決這問題？",
+    "options": [
+      "線性回歸",
+      "決策樹",
+      "CNN",
+      "YOLO"
+    ],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "十字路口的紅綠燈要根據即時車流量動態調整秒數，目標是最小化所有方向的平均等待時間。需要不斷嘗試不同策略。 身為AI應用規劃師，你想要用哪一種AI模型來解決這問題？",
+    "options": [
+      "強化學習",
+      "決策樹",
+      "CNN",
+      "邏輯回歸"
+    ],
+    "correct":0,
+    "explanation":"動態環境 + 連續決策 + 延遲獎勵 ➜ 強化學習。Agent 觀察各方向車流狀態，調整綠燈時長，透過「總等待時間降低」獲得獎勵，逐步學出最優控制策略。"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "銀行每天處理百萬筆交易，其中盜刷不到0.1%。需要自動標記「看起來不正常」的交易，模型事先不知道哪些是盜刷。 身為AI應用規劃師，你想要用哪一種AI模型來解決這問題？",
+    "options": [
+      "AutoEncoder",
+      "強化學習",
+      "決策樹",
+      "線性回歸"
+    ],
+    "correct":0,
+    "explanation":"極度不平衡的資料 + 偵測「異常」➜ AutoEncoder先學會正常交易的模式，當遇到異常交易時重建誤差會飆高，就能把它揪出來。這是異常偵測的經典手法。"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "生物學家有上萬個基因的表現量數據，想找出「共同調控的基因群組」，但事先不知道有幾組，也沒有標籤。 身為AI應用規劃師，你想要用哪一種AI模型來解決這問題？",
+    "options": [
+      "K-means",
+      "邏輯回歸",
+      "CNN",
+      "決策樹"
+    ],
+    "correct":0,
+    "explanation":"高維度 + 無標籤 + 找自然分群 ➜ K-Means（或階層式分群）。基因共表現分析是生物資訊學的經典應用，分群結果可揭示共同調控的基因網路。"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "Netflix 想根據用戶的觀影紀錄，找出口味最相似的用戶群體，用他們的喜好來推薦電影給你。 身為AI應用規劃師，你想要用哪一種AI模型來解決這問題？",
+    "options": [
+      "KNN",
+      "CNN",
+      "邏輯回歸",
+      "GAN"
+    ],
+    "correct":0,
+    "explanation":"找相似用戶 + 用鄰居偏好推薦 ➜ KNN的協同過濾！計算用戶之間的觀影相似度，找出最近的K個「口味鄰居」，他們喜歡但你沒看過的就是推薦清單。"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "寵物社群 App 上傳照片後，需要自動標記是貓還是狗。只需要分兩類，但照片的角度、光線、品種差異很大。 身為AI應用規劃師，你想要用哪一種AI模型來解決這問題？",
+    "options": [
+      "CNN",
+      "邏輯回歸",
+      "KNN",
+      "YOLO"
+    ],
+    "correct":0,
+    "explanation":"圖片 + 二分類 ➜ CNN。卷積層自動學習毛皮紋理、耳朵形狀等視覺特徵，是圖像分類的黃金標準。用 Transfer Learning 幾百張圖就能訓練出好模型。"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "一張照片有上百萬種顏色，想把它壓縮成只用 16 種代表色來呈現，盡可能保持視覺效果。需要找出最具代表性的 16 個顏色中心。 身為AI應用規劃師，你想要用哪一種AI模型來解決這問題？",
+    "options": [
+      "K-Means",
+      "KNN",
+      "決策樹",
+      "LLM"
+    ],
+    "correct":0,
+    "explanation":"找代表中心點 + 無監督 ➜ K-Means！把每個像素的 RGB 值當作資料點，K=16 做分群，每群的中心點就是代表色。這是影像壓縮的經典應用。"
+  },
+  {
+    "level": "中級",
+    "category": "科目三",
+    "question": "開發團隊想自動分類 App Store 上的用戶評論是正面還是負面。評論是短文本，需要快速處理每天數千則新評論。 身為AI應用規劃師，你想要用哪一種AI模型來解決這問題？",
+    "options": [
+      "朴素貝葉斯",
+      "SVM",
+      "CNN",
+      "LLM"
+    ],
+    "correct":0,
+    "explanation":"短文本二分類 + 詞頻特徵 + 需要快速 ➜ 朴素貝葉斯。它用詞的條件機率做分類，訓練和推論都超快，在短文本情感分析上效果出色且運算成本極低。"
+  },
+  {
+    "level":"中級",
+    "category":"科目三",
+    "question":"醫院希望 AI 幫放射科醫師初篩，自動判斷胸部X光片中是否有肺炎徵兆，輸出「正常/肺炎」分類結果。 身為AI應用規劃師，你想要用哪一種AI模型來解決這問題？",
+    "options":[
+      "CNN",
+      "邏輯回歸",
+      "SVM",
+      "決策樹"
+    ],
+    "correct":0,
+    "explanation":""
   }
 ]
