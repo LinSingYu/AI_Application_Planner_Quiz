@@ -52,6 +52,19 @@
     "explanation": ""
   },
   {
+    "level":"隱藏",
+    "category":"科目三",
+    "question":"在醫療診斷模型中，我們調整了判定為「陽性」的閾值，這會直接改變Precision 與Recall。請問AUC 值會因為閾值的改變而大幅變動嗎？",
+    "options":[
+      "不會",
+      "會",
+      "不一定",
+      "不知道"
+    ],
+    "correct":0,
+    "explanation":"AUC 是透過繪製「不同閾值下」的ROC 曲線，並計算其面積而來。因此，AUC評估的是模型輸出的「排序能力（正樣本排在負樣本前面的機率）」，不受單一給定閾值的影響。"
+  },
+  {
     "level": "隱藏",
     "category": "科目三",
     "question": "某些演算法天生更容易偏見是因為甚麼原因?",
@@ -89,5 +102,18 @@
     ],
     "correct": 0,
     "explanation": ""
+  },
+  {
+    "level": "隱藏",
+    "category": "科目三",
+    "question": "下列何種卷積神經網路(Convolution Neural Networks, CNN)是將卷積層加寬而非加深？",
+    "options": [
+      "VGG16",
+      "ResNet50",
+      "DenseNet121",
+      "Inception"
+    ],
+    "correct": 3,
+    "explanation": "InceptionV3 是一種將卷積層加寬而非加深的卷積神經網路架構。它透過在同一層中使用多種不同大小的卷積核來捕捉不同尺度的特徵，從而增加了模型的寬度。相比之下，VGG16、ResNet50 和 DenseNet121 都是通過增加層數(加深)來提升模型表達能力的架構。"
   }
 ]
