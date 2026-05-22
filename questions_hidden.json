@@ -93,6 +93,71 @@
   {
     "level": "隱藏",
     "category": "科目三",
+    "question": "資訊增益(Information Gain)常用於衡量特徵對分類結果的不確定性貢獻程度，並據以進行特徵選擇。此方法主要應用於下列哪一類模型架構中？ ",
+    "options": [
+      "透過遞迴分裂方式建立分類規則的決策樹模型",
+      "透過核函數(Kernel Function)將特徵映射至高維空間的分類模型",
+      "利用激活函數(Activation Function)進行特徵擷取的深度神經網路",
+      "使用 L1 正則化進行特徵篩選的線性模型"
+    ],
+    "correct": 0,
+    "explanation": ""
+  },
+  {
+    "level": "隱藏",
+    "category": "科目三",
+    "question": "某房地產公司利用多元迴歸模型(Multiple Regression Model)預測房價，並繪製殘差圖(Residual Plot)檢查模型品質。結果顯示部分資料點的殘差極大，且在高價區樣本中出現系統性彎曲分佈現象。根據此觀察，下列何者為最可能的正確解釋？",
+    "options": [
+      "模型過度擬合(Overfitting)，導致在訓練資料上表現過好、泛化能力不足",
+      "模型特徵數量不足，導致欠擬合(Underfitting)",
+      "模型存在異常值(Outlier)或非線性關係，違反迴歸假設",
+      "殘差圖呈現隨機分佈，表示模型已完全符合所有假設"
+    ],
+    "correct": 2,
+    "explanation": "殘差圖中出現極大殘差代表可能存在異常值(Outlier)，而在高價區出現系統性彎曲分佈，則表示模型未能捕捉資料中的非線性關係，違反了線性迴歸的基本假設(如線性關係與殘差隨機性)。因此最合理的解釋是模型存在異常值或非線性問題。其他選項如過擬合或欠擬合，無法直接從殘差呈現的特定形狀(如彎曲)得出結論。"
+  },
+  {
+    "level":"隱藏",
+    "category":"科目三",
+    "question":"下列何者最能同時反映 XGBoost（eXtreme Gradient Boosting）相較於傳統梯度提升決策樹（Gradient Boosting Decision Tree, GBDT）的主要技術改進？",
+    "options":[
+      "引入正則化項（Regularization）以抑制過擬合，並支援缺失值自動處理與並行化訓練",
+      "改以隨機森林（Random Forest）架構取代樹模型以提升準確率",
+      "以類神經網路（Neural Network）取代弱分類器（Weak Learners）",
+      "採用批次正規化（Batch Normalization）技術提升模型穩定性"
+    ],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level": "隱藏",
+    "category": "科目三",
+    "question": "某跨銀行風控平台希望整合多家銀行的用戶行為資料，用於訓練信用風險預測模型。由於競爭與法規限制，各銀行僅願意提供加密後資料，且資料在任何時間不得被平台解密。同時，平台需建立安全通訊協議以確保資料在傳輸過程未被竄改或重放。下列哪一組技術最能完整對應上述需求？",
+    "options": [
+      "對稱加密(Symmetric Encryption)＋ 單向雜湊(Hash Function)＋ 非對稱加密(Asymmetric Encryption)＋ 差分隱私(Differential Privacy)",
+      "同態加密(Homomorphic Encryption)＋ 非對稱加密(Asymmetric Encryption)＋ 單向雜湊(One-way Hash Function)＋ 對稱加密(Symmetric Encryption)",
+      "差分隱私(Differential Privacy)＋ 對稱加密(Symmetric Encryption)＋ 同態加密(Homomorphic Encryption)＋ 數位簽章(Digital Signature)",
+      "同態加密(Homomorphic Encryption)＋ 安全多方計算(Secure Multi-party Computation, MPC)＋ 雜湊函數(Hash Function)＋ 對稱加密(Symmetric Encryption)"
+    ],
+    "correct": 1,
+    "explanation": "同態加密：對應「平台不得解密但需訓練」。非對稱加密：用於安全交換金鑰。單向雜湊：對應「確保資料未被竄改」。對稱加密：用於大量資料傳輸加密。"
+  },
+  {
+    "level": "隱藏",
+    "category": "科目三",
+    "question": "某情感分析模型在英文資料集上取得macro F1-score = 0.91。當該模型部署於西班牙文資料集時，F1-score 驟降至0.58。下列哪一項解釋最合理，且與F1-score 變化相關？",
+    "options": [
+      "macro F1-score 本身波動性高，建議改用 micro-average F1-score 評估",
+      "模型在西班牙文語料上過度擬合，導致評估結果偏高",
+      "語言轉移造成召回率(Recall)下降，模型無法正確辨識關鍵情緒詞彙",
+      "以均方誤差(MSE)取代 F1-score 評估可獲得更準確的結果"
+    ],
+    "correct": 2,
+    "explanation": "模型在英文資料上訓練，直接應用到西班牙文會產生語言轉移問題(domain shift)，導致模型無法有效辨識關鍵情緒詞彙，使召回率(Recall)與精確率(Precision)下降，進而造成F1-score明顯下滑。因此最合理的解釋是語言差異影響模型辨識能力。其他選項無法合理解釋跨語言導致的性能大幅下降。"
+  },
+  {
+    "level": "隱藏",
+    "category": "科目三",
     "question": "下列哪一項公平性指標強調模型在不同群體之間的真陽性率和假陽性率應該相等？",
     "options": [
       "平等化機會",

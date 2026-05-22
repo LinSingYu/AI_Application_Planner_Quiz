@@ -7665,5 +7665,44 @@
     ],
     "correct":0,
     "explanation":""
+  },
+  {
+    "level":"中級",
+    "category":"科目三",
+    "question":"調整 超參數 時，哪個 超參數 通常對 深度學習 模型的性能 影響最大 ，需要 優先調整 ？",
+    "options":[
+      "學習率 ( Learning Rate )",
+      "優化器 的 beta1 參數",
+      "批次大小 ( Batch Size )",
+      "Dropout 率"
+    ],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"中級",
+    "category":"科目三",
+    "question":"在 假設檢定 （ Hypothesis Testing ）中， P 值（ P-value ）代表什麼意義？",
+    "options":[
+      "在 虛無假設 為真的前提下， 觀察到當前樣本結果或更極端結果的機率 。",
+      "虛無假設 （ Null Hypothesis , H0 ）為真的 機率 。",
+      "對立假設 （ Alternative Hypothesis , H1 ）為真的 機率 。",
+      "犯 第一型錯誤 （ Type I Error ）的 機率 上限，即 顯著水準 （ Significance Level , α）"
+    ],
+    "correct":0,
+    "explanation":""
+  },
+  {
+    "level":"中級",
+    "category":"科目三",
+    "question":"下列何者最能同時反映 XGBoost（eXtreme Gradient Boosting）相較於傳統梯度提升決策樹（Gradient Boosting Decision Tree, GBDT）的主要技術改進？",
+    "options":[
+      "引入正則化項（Regularization）以抑制過擬合，並支援缺失值自動處理與並行化訓練",
+      "改以隨機森林（Random Forest）架構取代樹模型以提升準確率",
+      "以類神經網路（Neural Network）取代弱分類器（Weak Learners）",
+      "採用批次正規化（Batch Normalization）技術提升模型穩定性"
+    ],
+    "correct":0,
+    "explanation":""
   }
 ]
